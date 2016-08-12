@@ -1,4 +1,4 @@
-GridMapCreator
+#GridMapCreator
 
 In this project I will have made a website and server to create and save DnD
 maps. I'll use HTML, JavaScript, Bootstrap, Ruby, and Ruby on Rails.
