@@ -1,2 +1,22 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'colors';
+
+.gameboard {
+  background-color: $pure-white;
+  height: 250px;
+  max-width: 250px;
+}
+
+.square {
+  border: 1px solid $pure-black;
+  height: 50px;
+  max-width: 50px;
+  padding: 0;
+}
+
+// .square > img {
+//   height: 40px;
+//   padding: 0;
+//   width: 40px;
+// }
