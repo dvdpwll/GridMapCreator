@@ -2,6 +2,14 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'colors';
 
+h1 {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+
 .gameboard {
   background-color: $pure-white;
   height: 250px;

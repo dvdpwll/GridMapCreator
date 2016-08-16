@@ -45,7 +45,9 @@
         </div><!-- /.container-fluid -->
       </nav>
       <!-- NAVBAR -->
-
+      <!-- NAME OF MAP -->
+      <h1>Name of Map</h1>
+      <!-- NAME OF MAP -->
       <!-- GAMEBOARD -->
       <div class="container gameboard">
         <div class="row">
@@ -85,7 +87,131 @@
         </div>
       </div>
       <!-- GAMEBOARD -->
+      <!-- FOOTER -->
+        <footer>
+          <p>
+            David Powell
+          </p>
+        </footer>
+      <!-- FOOTER -->
+      <!-- MODALS -->
+        <!-- Sign Up -->
+        <div id="sign-up-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Sign Up</h4>
+              </div>
+              <div class="modal-body">
+                <!-- Username -->
+                <div class="input-group">
+                  <span class="input-group-addon">Email</span>
+                  <input type="text" class="form-control"  id="sign-up-email" placeholder="Email" aria-describedby="basic-addon1">
+                </div>
+                <!-- Password -->
+                <div class="input-group">
+                  <span class="input-group-addon">Password</span>
+                  <input type="password" class="form-control"  id="sign-up-password" placeholder="Password" aria-describedby="basic-addon1">
+                </div>
+                <!-- Confirm Password -->
+                <div class="input-group">
+                  <span class="input-group-addon">Confirm Password</span>
+                  <input type="password" class="form-control"  id="sign-up-confirm-password" placeholder="Confirm Password" aria-describedby="basic-addon1">
+                </div>
+                <!-- End input fields -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="sign-up-submit">Submit</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Log In -->
+        <div id="log-in-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Log In</h4>
+              </div>
+              <div class="modal-body">
+                <!-- Username -->
+                <div class="input-group">
+                  <span class="input-group-addon">Email</span>
+                  <input type="text" class="form-control"  id="log-in-email" placeholder="Email" aria-describedby="basic-addon1">
+                </div>
+                <!-- Password -->
+                <div class="input-group">
+                  <span class="input-group-addon">Password</span>
+                  <input type="password" class="form-control"  id="log-in-password" placeholder="Password" aria-describedby="basic-addon1">
+                </div>
+                <!-- End input fields -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="log-in-submit">Log In</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Change Password -->
+        <div id="change-password-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Password</h4>
+              </div>
+              <div class="modal-body">
+                <!-- Current password -->
+                <div class="input-group">
+                  <span class="input-group-addon">Current Password</span>
+                  <input type="password" class="form-control"  id="current-password" placeholder="Current Password" aria-describedby="basic-addon1">
+                </div>
+                <!-- New Password -->
+                <div class="input-group">
+                  <span class="input-group-addon">New Password</span>
+                  <input type="password" class="form-control"  id="new-password" placeholder="New Password" aria-describedby="basic-addon1">
+                </div>
+                <!-- End input fields -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="change-password-submit">Submit</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Load One Map  -->
+        <div id="load-map-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Load Map</h4>
+              </div>
+              <div class="modal-body">
+                <!-- game id -->
+                <div class="input-group">
+                  <span class="input-group-addon">Map Id</span>
+                  <input type="text" class="form-control"  id="load-map-id" placeholder="map id" aria-describedby="basic-addon1">
+                </div>
+                <!-- End input fields -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="load-map-submit">Submit</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
 
+      <!-- MODALS -->
     </body>
 </html>
