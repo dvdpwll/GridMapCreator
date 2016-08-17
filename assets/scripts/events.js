@@ -2,8 +2,9 @@
 const api = require('./api');
 const ui = require('./ui');
 
-//global variables
-
+//global variables, add new variables when adding new images
+let rockImg = '<img src="./assets/rock.png">';//change this if you change the img file for rock.
+let treeImg = '<img src="./assets/tree.png">';//change this if you change the img file for tree.
 
 //user sign up
 const onSignUp = function () {
@@ -103,15 +104,28 @@ const onNewMap = function () {
     .fail(ui.failure);
 };
 
+//place an image of thing
+const placeThing = function (s, o) {
+
+};
+
 //place a thing
 const onMap = function () {
-  console.log('Map was clicked');
-  let test = $("input[type='radio'][name='thing']:checked").val();
-  console.log(test);
+  //get the selected thing
+  let selected = $("input[name='thing']:checked").val();
 
-
-
-  // $("input[type='radio'][name='rate']:che‌​cked").val();
+  //switch statement to place an image of thing
+  switch(selected) {
+      case 'rock':
+          $(this).empty();
+          $(this).prepend(rockImg);
+          break;
+      case 'tree':
+          $(this).empty();
+          $(this).prepend(treeImg);
+          break;
+      default:
+  }
 };
 
 const addHandlers = () => {
@@ -124,6 +138,30 @@ const addHandlers = () => {
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();
   $('#T00').on('click', onMap);
+  $('#T01').on('click', onMap);
+  $('#T02').on('click', onMap);
+  $('#T03').on('click', onMap);
+  $('#T04').on('click', onMap);
+  $('#T05').on('click', onMap);
+  $('#T06').on('click', onMap);
+  $('#T07').on('click', onMap);
+  $('#T08').on('click', onMap);
+  $('#T09').on('click', onMap);
+  $('#T10').on('click', onMap);
+  $('#T11').on('click', onMap);
+  $('#T12').on('click', onMap);
+  $('#T13').on('click', onMap);
+  $('#T14').on('click', onMap);
+  $('#T15').on('click', onMap);
+  $('#T16').on('click', onMap);
+  $('#T17').on('click', onMap);
+  $('#T18').on('click', onMap);
+  $('#T19').on('click', onMap);
+  $('#T20').on('click', onMap);
+  $('#T21').on('click', onMap);
+  $('#T22').on('click', onMap);
+  $('#T23').on('click', onMap);
+  $('#T24').on('click', onMap);
 };
 
 module.exports = {
