@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li id="sign-up"><a href="#">Sign Up</a></li>
               <li id="log-in"><a href="#">Log In</a></li>
-              <li id="new-game"><a href="#">New Map</a></li>
+              <li id="new-map"><a href="#">New Map</a></li>
               <li id="clear-board"><a href="#">Clear Board</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More Options<span class="caret"></span></a>
@@ -87,6 +87,22 @@
         </div>
       </div>
       <!-- GAMEBOARD -->
+      <!-- SELECTOR -->
+      <div class="btn-group selector-group" data-toggle="buttons">
+        <label class="btn btn-primary active">
+          <input type="radio" name="thing" value="none" id="none" autocomplete="off" checked>
+          <img class="selectors" src="./assets/none.png" alt="none" />
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="thing" value="rock" id="rock" autocomplete="off">
+          <img class="selectors" src="./assets/rock.png" alt="rock" />
+        </label>
+        <label class="btn btn-primary">
+          <input type="radio" name="thing" value="tree" id="tree" autocomplete="off">
+          <img class="selectors" src="./assets/tree.png" alt="tree" />
+        </label>
+      </div>
+      <!-- SELECTOR -->
       <!-- FOOTER -->
         <footer>
           <p>

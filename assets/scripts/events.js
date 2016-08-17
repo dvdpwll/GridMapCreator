@@ -2,6 +2,9 @@
 const api = require('./api');
 const ui = require('./ui');
 
+//global variables
+
+
 //user sign up
 const onSignUp = function () {
   $('#sign-up-modal').modal('show');
@@ -88,11 +91,39 @@ const onChangePassword = function () {
   });
 };
 
+//make a new map
+const onNewMap = function () {
+  let data = {
+    "map": {
+      "name": 'NewMap Test',
+    }
+  };
+  api.newMap(data)
+    .done(ui.newMapSuccess)
+    .fail(ui.failure);
+};
+
+//place a thing
+const onMap = function () {
+  console.log('Map was clicked');
+  let test = $("input[type='radio'][name='thing']:checked").val();
+  console.log(test);
+
+
+
+  // $("input[type='radio'][name='rate']:che‌​cked").val();
+};
+
 const addHandlers = () => {
   $('#sign-up').on('click', onSignUp);
   $('#log-in').on('click', onLogIn);
   $('#log-out').on('click', onLogOut);
   $('#change-password').on('click', onChangePassword);
+  $('#new-map').on('click', onNewMap);
+  $('#new-map').hide();
+  $('#clear-board').hide();
+  $('.dropdown-toggle').hide();
+  $('#T00').on('click', onMap);
 };
 
 module.exports = {

@@ -36,9 +36,21 @@ const changePassword = (data) => $.ajax({
   data,
 });
 
+//new map
+const newMap = (data) => $.ajax({
+  url: appVar.app.api + 'maps/',
+  method: 'POST',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+  //data: data,
+  data,
+});
+
 module.exports = {
   signUp,
   logIn,
   signOut,
   changePassword,
+  newMap,
 };

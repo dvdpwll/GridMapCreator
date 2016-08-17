@@ -16,13 +16,33 @@ const failure = (error) => {
 const signInSuccess = (data) => {
   appVar.app.user = data.user;
   console.log(appVar);
+
+  $('#new-map').show();
+  $('#clear-board').show();
+  $('.dropdown-toggle').show();
+  $('#sign-up').hide();
+  $('#log-in').hide();
 };
 
 //success for sign out
 const signOutSuccess = () => {
   delete appVar.app.user;
   console.log(appVar);
+
+  $('#new-map').hide();
+  $('#clear-board').hide();
+  $('.dropdown-toggle').hide();
+  $('#sign-up').show();
+  $('#log-in').show();
 };
+
+//success for new map
+const newMapSuccess = (data) => {
+  appVar.app.map = data.map;
+  console.log(appVar);
+};
+
+
 
 
 module.exports = {
@@ -30,4 +50,5 @@ module.exports = {
   failure,
   signInSuccess,
   signOutSuccess,
+  newMapSuccess,
 };
