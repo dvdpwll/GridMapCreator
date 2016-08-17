@@ -104,9 +104,9 @@ const onNewMap = function () {
     .fail(ui.failure);
 };
 
-//place an image of thing
-const placeThing = function (s, o) {
-
+//clear the board of all images
+const onClearBoard = function () {
+  $('.square').empty();
 };
 
 //place a thing
@@ -134,6 +134,7 @@ const addHandlers = () => {
   $('#log-out').on('click', onLogOut);
   $('#change-password').on('click', onChangePassword);
   $('#new-map').on('click', onNewMap);
+  $('#clear-board').on('click', onClearBoard);
   $('#new-map').hide();
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();
