@@ -3,8 +3,9 @@ const api = require('./api');
 const ui = require('./ui');
 
 //global variables, add new variables when adding new images
-let rockImg = '<img src="./assets/rock.png">';//change this if you change the img file for rock.
-let treeImg = '<img src="./assets/tree.png">';//change this if you change the img file for tree.
+// let noneImg = '<img src="./assets/none.png">';//change this if you change the img file for none.
+let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
+let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
 
 //user sign up
 const onSignUp = function () {
@@ -92,11 +93,44 @@ const onChangePassword = function () {
   });
 };
 
+//send save data
+const sendSave = function (t, o) {
+  let data = {
+    "element": {
+      "thing": t,
+      "order": o,
+      "map_id": api.appVar.app.map.id
+    }
+  };
+
+  api.saveElement(data)
+    .done(ui.success)
+    .fail(ui.failure);
+};
+
+//save a map
+const onSaveMap = function () {
+  let i = 0;
+  //checks each square
+  $('.square').each(function(){
+    i++;
+    //extracts the data-thing value from the img
+    let tmp = $(this).children().data('thing');
+    if (tmp) {
+      sendSave(tmp, i);
+    }
+    else {
+      sendSave('none', i);
+    }
+  });
+};
+
 //make a new map
 const onNewMap = function () {
   let data = {
     "map": {
       "name": 'NewMap Test',
+      "user_id": api.appVar.app.user.id
     }
   };
   api.newMap(data)
@@ -125,6 +159,7 @@ const onMap = function () {
           $(this).prepend(treeImg);
           break;
       default:
+          $(this).empty();
   }
 };
 
@@ -133,8 +168,10 @@ const addHandlers = () => {
   $('#log-in').on('click', onLogIn);
   $('#log-out').on('click', onLogOut);
   $('#change-password').on('click', onChangePassword);
+  $('#save-map').on('click', onSaveMap);
   $('#new-map').on('click', onNewMap);
   $('#clear-board').on('click', onClearBoard);
+  $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();

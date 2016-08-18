@@ -47,10 +47,23 @@ const newMap = (data) => $.ajax({
   data,
 });
 
+//save map
+const saveElement = (data) => $.ajax({
+  url: appVar.app.api + 'elements/',
+  method: 'POST',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+  //data: data,
+  data,
+});
+
 module.exports = {
   signUp,
   logIn,
   signOut,
   changePassword,
   newMap,
+  saveElement,
+  appVar,
 };

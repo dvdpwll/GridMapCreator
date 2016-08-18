@@ -17,6 +17,7 @@ const signInSuccess = (data) => {
   appVar.app.user = data.user;
   console.log(appVar);
 
+  $('#save-map').show();
   $('#new-map').show();
   $('#clear-board').show();
   $('.dropdown-toggle').show();
@@ -29,6 +30,7 @@ const signOutSuccess = () => {
   delete appVar.app.user;
   console.log(appVar);
 
+  $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();
