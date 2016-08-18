@@ -146,6 +146,11 @@ const onClearBoard = function () {
 //display the maps in the all maps modal
 const displayAllMaps = function (data) {
   console.log(data);
+  $('#show-all-maps-body').empty();
+  $('#show-all-maps-body').append("<p>Map #:    Name: </p>");
+  for (let i = 0; i < data.maps.length; i++) {
+    $('#show-all-maps-body').append("<p>" + data.maps[i].id + " " +  data.maps[i].name + "</p>");
+  }
 };
 
 //see all maps the user has made
