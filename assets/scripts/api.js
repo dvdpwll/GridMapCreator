@@ -47,7 +47,7 @@ const newMap = (data) => $.ajax({
   data,
 });
 
-//save map
+//save each element to save the map
 const saveElement = (data) => $.ajax({
   url: appVar.app.api + 'elements/',
   method: 'POST',
@@ -58,6 +58,14 @@ const saveElement = (data) => $.ajax({
   data,
 });
 
+const seeAllMaps = () => $.ajax({
+  url: appVar.app.api + 'users/' + appVar.app.user.id + '/maps/',
+  method: 'GET',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+});
+
 module.exports = {
   signUp,
   logIn,
@@ -65,5 +73,6 @@ module.exports = {
   changePassword,
   newMap,
   saveElement,
+  seeAllMaps,
   appVar,
 };

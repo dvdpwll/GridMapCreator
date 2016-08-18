@@ -143,6 +143,20 @@ const onClearBoard = function () {
   $('.square').empty();
 };
 
+//display the maps in the all maps modal
+const displayAllMaps = function (data) {
+  console.log(data);
+};
+
+//see all maps the user has made
+const onSeeAllMaps = function () {
+  $('#show-all-maps-modal').modal('show');
+
+  api.seeAllMaps()
+    .done(displayAllMaps)
+    .fail(ui.failure);
+};
+
 //place a thing
 const onMap = function () {
   //get the selected thing
@@ -171,6 +185,7 @@ const addHandlers = () => {
   $('#save-map').on('click', onSaveMap);
   $('#new-map').on('click', onNewMap);
   $('#clear-board').on('click', onClearBoard);
+  $('#see-all-maps').on('click', onSeeAllMaps);
   $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();
