@@ -14,9 +14,12 @@ const failure = (error) => {
 
 //success for sign in
 const signInSuccess = (data) => {
+  //save user info
   appVar.app.user = data.user;
   console.log(appVar);
 
+
+  //hide/show certain buttons
   $('#save-map').show();
   $('#new-map').show();
   $('#clear-board').show();
@@ -27,9 +30,11 @@ const signInSuccess = (data) => {
 
 //success for sign out
 const signOutSuccess = () => {
+  //remove saved user info
   delete appVar.app.user;
   console.log(appVar);
 
+  //hide/show certain buttons
   $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();
@@ -40,20 +45,13 @@ const signOutSuccess = () => {
 
 //success for new element
 const newElementSuccess = (data) => {
+  //get order number
   let index = data.element.order;
-  appVar.app.elements[index] = data.element.id;
 
+  //save the data.element id into app.elements array using order
+  appVar.app.elements[index] = data.element.id;
   console.log(appVar.app.elements);
 };
-
-// //success for new map
-// const newMapSuccess = (data) => {
-//   appVar.app.map = data.map;
-//   console.log(appVar);
-// };
-
-
-
 
 module.exports = {
   success,

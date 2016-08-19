@@ -3,13 +3,15 @@ const api = require('./api');
 const ui = require('./ui');
 
 //global variables, add new variables when adding new images
-// let noneImg = '<img src="./assets/none.png">';//change this if you change the img file for none.
 let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
 let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
 
 //user sign up
 const onSignUp = function () {
+  //open sign up modal
   $('#sign-up-modal').modal('show');
+
+  //on submit
   $('#sign-up-submit').on('click',function(){
     //get text fields
     let email = $('#sign-up-email').val();
@@ -37,7 +39,10 @@ const onSignUp = function () {
 
 //user log in
 const onLogIn = function () {
+  //show login modal
   $('#log-in-modal').modal('show');
+
+  //on submit
   $('#log-in-submit').on('click',function(){
     //get text fields
     let email = $('#log-in-email').val();
@@ -63,6 +68,7 @@ const onLogIn = function () {
 
 //user log out
 const onLogOut = function () {
+  //send request
   api.signOut()
     .done(ui.signOutSuccess)
     .fail(ui.failure);
@@ -70,12 +76,16 @@ const onLogOut = function () {
 
 //user changes password
 const onChangePassword = function () {
+  //show change password modal
   $('#change-password-modal').modal('show');
+
+  //on submit
   $('#change-password-submit').on('click',function(){
     //get text fields
     let oldPassword = $('#current-password').val();
     let NewPassword = $('#new-password').val();
 
+    //put info in data object
     let data = {
       "passwords": {
         "old": oldPassword,
@@ -94,46 +104,60 @@ const onChangePassword = function () {
 };
 
 //send save data
-//change to patch
 const sendSave = function (t, id) {
+  //put info in data object
   let data = {
     "element": {
       "thing": t,
     }
   };
 
+  //send data and data id to api
   api.saveElement(data, id)
     .done(ui.success)
     .fail(ui.failure);
 };
 
 //save a map
-//remove delete, change to patch
 const onSaveMap = function () {
+  //increment
   let i = 0;
+
   //checks each square
   $('.square').each(function(){
+    //get id of element
     let id = api.appVar.app.elements[i];
 
     //extracts the data-thing value from the img
     let thing = $(this).children().data('thing');
+
+    //if an image exists then send thing, if no img then send none
     if (thing) {
       sendSave(thing, id);
     }
     else {
       sendSave('none', id);
     }
+
+    //increment
     i++;
   });
 };
 
 //make a new map
 const newElements = function (data) {
+  //save new map info
   api.appVar.app.map = data.map;
+
+  //get map info
   let mapId = api.appVar.app.map.id;
 
+  //for each element make a data with a thing of none
   $('.square').each(function(){
+    //get index of square
     let i = $(this).data('square');
+
+    //put info in data
     let data = {
       "element": {
         "thing": 'none',
@@ -142,6 +166,7 @@ const newElements = function (data) {
       }
     };
 
+    // send data to api, make an element for each square
     api.newElement(data)
       .done(ui.newElementSuccess)
       .fail(ui.failure);
@@ -150,12 +175,15 @@ const newElements = function (data) {
 
 //make a new map
 const onNewMap = function () {
+  //put info in data
   let data = {
     "map": {
       "name": 'NewMap Test',
       "user_id": api.appVar.app.user.id
     }
   };
+
+  //send data to api
   api.newMap(data)
     .done(newElements)
     .fail(ui.failure);
@@ -168,8 +196,13 @@ const onClearBoard = function () {
 
 //display the maps in the all maps modal
 const displayAllMaps = function (data) {
+  //empty the body of the show all maps modal
   $('#show-all-maps-body').empty();
+
+  //add header for list
   $('#show-all-maps-body').append("<p>Map #:    Name: </p>");
+
+  //add info for each map for user
   for (let i = 0; i < data.maps.length; i++) {
     $('#show-all-maps-body').append("<p>" + data.maps[i].id + " " +  data.maps[i].name + "</p>");
   }
@@ -177,8 +210,10 @@ const displayAllMaps = function (data) {
 
 //see all maps the user has made
 const onSeeAllMaps = function () {
+  //show the all maps modal
   $('#show-all-maps-modal').modal('show');
 
+  //get all maps for user
   api.seeAllMaps()
     .done(displayAllMaps)
     .fail(ui.failure);
@@ -186,11 +221,17 @@ const onSeeAllMaps = function () {
 
 //display one map
 const displayMap = function (data) {
+  //save map id
   api.appVar.app.map = data.elements[0].map;
+
   //checks each square
   $('.square').each(function(){
+    //get index of square
     let index = $(this).data('square');
+
+    //loop through elements array
     for (let i = 0; i < data.elements.length; i++) {
+      //if element order # is same as square index number insert img
       if (data.elements[i].order === index) {
         let thing = data.elements[i].thing;
 
@@ -214,12 +255,15 @@ const displayMap = function (data) {
 
 //load one map
 const onLoadMap = function () {
+  //show load map modal
   $('#load-map-modal').modal('show');
 
+  //on submit
   $('#load-map-submit').on('click',function(){
     //get text field
     let mapId = $('#load-map-id').val();
 
+    //get map by id
     api.seeElements(mapId)
       .done(displayMap)
       .fail(ui.failure);
@@ -229,10 +273,12 @@ const onLoadMap = function () {
   });
 };
 
-//delete map after finished deleteing all elements
+//delete the map after finished deleteing all elements
 const deleteMap = function () {
+  //get map id
   let mapId = api.appVar.app.map.id;
 
+  //delete map by id
   api.delMap(mapId)
     .done(ui.success)
     .fail(ui.failure);
@@ -240,14 +286,15 @@ const deleteMap = function () {
 
 //delete elements of map id
 const deleteElements = function (data) {
+  //get map id
   let mapId = api.appVar.app.map.id;
 
   //delete all elements of a map
   for (let i = 0; i < data.elements.length; i++) {
+    //get element id
     let elementId = data.elements[i].id;
-    // console.log(elementId);
 
-    //if last element delete map, else continue to delte elements
+    //if last element delete map, else continue to delete elements
     if (i === 24) {
       api.deleteElement(mapId, elementId)
         .done(deleteMap)

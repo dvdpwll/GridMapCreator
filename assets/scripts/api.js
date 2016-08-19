@@ -47,7 +47,7 @@ const newMap = (data) => $.ajax({
   data,
 });
 
-//save each element to save the map
+//upon newMap make elements for map
 const newElement = (data) => $.ajax({
   url: appVar.app.api + 'elements/',
   method: 'POST',
@@ -58,7 +58,7 @@ const newElement = (data) => $.ajax({
   data,
 });
 
-//see all maps by user
+//see all maps by user id
 const seeAllMaps = () => $.ajax({
   url: appVar.app.api + 'users/' + appVar.app.user.id + '/maps/',
   method: 'GET',
@@ -67,7 +67,7 @@ const seeAllMaps = () => $.ajax({
   },
 });
 
-//see one map by user and id
+//get all elements linked to a map id
 const seeElements = (data) => $.ajax({
   url: appVar.app.api + 'maps/' + data + '/elements/',
   method: 'GET',
