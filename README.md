@@ -16,50 +16,50 @@ In addition to the default user table, I will be making a Maps table and a
 Elements table. The Maps table will have a One-To-Many relationship with User,
 and Elements will have a One-To-Many relationship with Maps.
 Maps:
-  id: serial primary key
-  map_name: string
-  user_id: reference
+-id: serial primary key
+-map_name: string
+-user_id: reference
 Elements:
-  id: serial primary key
-  thing: string
-  order: integer
-  map_id: reference
+-id: serial primary key
+-thing: string
+-order: integer
+-map_id: reference
 
 Devolopment:
-  Create the wireframe.
-    Start off with a grid of 5x5, go to 10x10 eventually.
-  Create the database using rails
-    Make a user(rails makes this)
-    Make a maps table
-  Create ajax for user
-  Create logic for clicking on the grid
-  Create ajax for maps
-  Include graphics for grid (trees, rocks, grass)
-  Clean up code and make pretty
+-Create the wireframe.
+  -Start off with a grid of 5x5, go to 10x10 eventually.
+-Create the database using rails
+  -Make a user(rails makes this)
+  -Make a maps table
+-Create ajax for user
+-Create logic for clicking on the grid
+-Create ajax for maps
+-Include graphics for grid (trees, rocks, grass)
+-Clean up code and make pretty
 
 Thing to change in the future:
-  Search for other people's maps
-  Rate other people's maps
-  Include a dropdown selector for types for terrain
-    -grass
-    -sand
-    -cave
-    -buildings
-    -monsters
-  Convert to a pdf so that you can print it.
-    (maybe you don't have to convert to pdf to make it printable.)
-  Variable map sizes
-    Independently variable lengths and widths
-  Generate a random map
+-Search for other people's maps
+-Rate other people's maps
+-Include a dropdown selector for types for terrain
+  -grass
+  -sand
+  -cave
+  -buildings
+  -monsters
+-Convert to a pdf so that you can print it.
+  -(maybe you don't have to convert to pdf to make it printable.)
+-Variable map sizes
+  -Independently variable lengths and widths
+-Generate a random map
 
 Wireframes: https://wireframe.cc/trdNcg
 
 User Stories:
-  As a user I want to save my maps so that I can come back to it later.
-  As a user I want lots of options for things to put on my board.
-  As a user I want name my maps
-  As a user I want to see all of my maps
-  As an admin I want to only prevent others from accessing other people's maps.
-  As an admin I want to remove a user.
-  As an admin I want users to be able to change their password.
-  As an admin I want the SPA to communicate to a server.
+-As a user I want to save my maps so that I can come back to it later.
+-As a user I want lots of options for things to put on my board.
+-As a user I want name my maps
+-As a user I want to see all of my maps
+-As an admin I want to only prevent others from accessing other people's maps.
+-As an admin I want to remove a user.
+-As an admin I want users to be able to change their password.
+-As an admin I want the SPA to communicate to a server.
