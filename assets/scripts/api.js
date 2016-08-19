@@ -48,7 +48,7 @@ const newMap = (data) => $.ajax({
 });
 
 //save each element to save the map
-const saveElement = (data) => $.ajax({
+const newElement = (data) => $.ajax({
   url: appVar.app.api + 'elements/',
   method: 'POST',
   headers: {
@@ -58,6 +58,7 @@ const saveElement = (data) => $.ajax({
   data,
 });
 
+//see all maps by user
 const seeAllMaps = () => $.ajax({
   url: appVar.app.api + 'users/' + appVar.app.user.id + '/maps/',
   method: 'GET',
@@ -66,13 +67,45 @@ const seeAllMaps = () => $.ajax({
   },
 });
 
+//see one map by user and id
+const seeElements = (data) => $.ajax({
+  url: appVar.app.api + 'maps/' + data + '/elements/',
+  method: 'GET',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+});
+
+//patch each element to save the map
+const saveElement = (data, id) => $.ajax({
+  url: appVar.app.api + 'elements/' + id,
+  method: 'PATCH',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+  //data: data,
+  data,
+});
+
+// //see one map by user and id
+// const deleteElement = (m, e) => $.ajax({
+//   url: appVar.app.api + 'maps/' + m + '/elements/' + e,
+//   method: 'DELETE',
+//   headers: {
+//     Authorization: 'Token token=' + appVar.app.user.token,
+//   },
+// });
+
 module.exports = {
   signUp,
   logIn,
   signOut,
   changePassword,
   newMap,
-  saveElement,
+  newElement,
   seeAllMaps,
+  seeElements,
+  saveElement,
+  // deleteElement,
   appVar,
 };

@@ -94,34 +94,57 @@ const onChangePassword = function () {
 };
 
 //send save data
-const sendSave = function (t, o) {
+//change to patch
+const sendSave = function (t, id) {
   let data = {
     "element": {
       "thing": t,
-      "order": o,
-      "map_id": api.appVar.app.map.id
     }
   };
 
-  api.saveElement(data)
+  api.saveElement(data, id)
     .done(ui.success)
     .fail(ui.failure);
 };
 
 //save a map
+//remove delete, change to patch
 const onSaveMap = function () {
   let i = 0;
   //checks each square
   $('.square').each(function(){
-    i++;
+    let id = api.appVar.app.elements[i];
+
     //extracts the data-thing value from the img
-    let tmp = $(this).children().data('thing');
-    if (tmp) {
-      sendSave(tmp, i);
+    let thing = $(this).children().data('thing');
+    if (thing) {
+      sendSave(thing, id);
     }
     else {
-      sendSave('none', i);
+      sendSave('none', id);
     }
+    i++;
+  });
+};
+
+//make a new map
+const newElements = function (data) {
+  api.appVar.app.map = data.map;
+  let mapId = api.appVar.app.map.id;
+
+  $('.square').each(function(){
+    let i = $(this).data('square');
+    let data = {
+      "element": {
+        "thing": 'none',
+        "order": i,
+        "map_id": mapId
+      }
+    };
+
+    api.newElement(data)
+      .done(ui.newElementSuccess)
+      .fail(ui.failure);
   });
 };
 
@@ -134,7 +157,7 @@ const onNewMap = function () {
     }
   };
   api.newMap(data)
-    .done(ui.newMapSuccess)
+    .done(newElements)
     .fail(ui.failure);
 };
 
@@ -145,7 +168,6 @@ const onClearBoard = function () {
 
 //display the maps in the all maps modal
 const displayAllMaps = function (data) {
-  console.log(data);
   $('#show-all-maps-body').empty();
   $('#show-all-maps-body').append("<p>Map #:    Name: </p>");
   for (let i = 0; i < data.maps.length; i++) {
@@ -160,6 +182,53 @@ const onSeeAllMaps = function () {
   api.seeAllMaps()
     .done(displayAllMaps)
     .fail(ui.failure);
+};
+
+//display one map
+const displayMap = function (data) {
+  console.log('displayMap data');
+  console.log(data);
+  api.appVar.app.map = data.elements[0].map;
+  //checks each square
+  $('.square').each(function(){
+    let index = $(this).data('square');
+    for (let i = 0; i < data.elements.length; i++) {
+      if (data.elements[i].order === index) {
+        let thing = data.elements[i].thing;
+
+        //switch statement to place an image of thing
+        switch(thing) {
+            case 'rock':
+                $(this).empty();
+                $(this).prepend(rockImg);
+                break;
+            case 'tree':
+                $(this).empty();
+                $(this).prepend(treeImg);
+                break;
+            default:
+                $(this).empty();
+        }
+      }
+    }
+  });
+};
+
+//load one map
+const onLoadMap = function () {
+  $('#load-map-modal').modal('show');
+
+  $('#load-map-submit').on('click',function(){
+    //get text field
+    let mapId = $('#load-map-id').val();
+
+    api.seeElements(mapId)
+      .done(displayMap)
+      .fail(ui.failure);
+
+    //close modal
+    $('#load-map-modal').modal('hide');
+  });
 };
 
 //place a thing
@@ -191,6 +260,7 @@ const addHandlers = () => {
   $('#new-map').on('click', onNewMap);
   $('#clear-board').on('click', onClearBoard);
   $('#see-all-maps').on('click', onSeeAllMaps);
+  $('#load-map').on('click', onLoadMap);
   $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();

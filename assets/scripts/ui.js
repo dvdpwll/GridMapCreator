@@ -38,11 +38,19 @@ const signOutSuccess = () => {
   $('#log-in').show();
 };
 
-//success for new map
-const newMapSuccess = (data) => {
-  appVar.app.map = data.map;
-  console.log(appVar);
+//success for new element
+const newElementSuccess = (data) => {
+  let index = data.element.order;
+  appVar.app.elements[index] = data.element.id;
+
+  console.log(appVar.app.elements);
 };
+
+// //success for new map
+// const newMapSuccess = (data) => {
+//   appVar.app.map = data.map;
+//   console.log(appVar);
+// };
 
 
 
@@ -52,5 +60,6 @@ module.exports = {
   failure,
   signInSuccess,
   signOutSuccess,
-  newMapSuccess,
+  newElementSuccess,
+  // newMapSuccess,
 };

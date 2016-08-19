@@ -10,6 +10,8 @@ Technologies: HTML, SCSS, JS, JQUERY, AJAX, RUBY, RUBY ON RAILS
 Devolopment:
 
 Thing to change in the future:
+make more efficient saveMap function by remembering which elements were changed
+and only send patch requests for those elements
 
 Wireframes: https://wireframe.cc/trdNcg
 
