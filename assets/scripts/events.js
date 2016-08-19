@@ -149,6 +149,11 @@ const newElements = function (data) {
   //save new map info
   api.appVar.app.map = data.map;
 
+  //get map name and add to screen
+  let name = api.appVar.app.map.name;
+  $('.mapName').empty();
+  $('.mapName').append("<h1>" + name + "</h1>");
+
   //get map info
   let mapId = api.appVar.app.map.id;
 
