@@ -186,8 +186,6 @@ const onSeeAllMaps = function () {
 
 //display one map
 const displayMap = function (data) {
-  console.log('displayMap data');
-  console.log(data);
   api.appVar.app.map = data.elements[0].map;
   //checks each square
   $('.square').each(function(){
@@ -231,6 +229,51 @@ const onLoadMap = function () {
   });
 };
 
+//delete map after finished deleteing all elements
+const deleteMap = function () {
+  let mapId = api.appVar.app.map.id;
+
+  api.delMap(mapId)
+    .done(ui.success)
+    .fail(ui.failure);
+};
+
+//delete elements of map id
+const deleteElements = function (data) {
+  let mapId = api.appVar.app.map.id;
+
+  //delete all elements of a map
+  for (let i = 0; i < data.elements.length; i++) {
+    let elementId = data.elements[i].id;
+    // console.log(elementId);
+
+    //if last element delete map, else continue to delte elements
+    if (i === 24) {
+      api.deleteElement(mapId, elementId)
+        .done(deleteMap)
+        .fail(ui.failure);
+    }
+    else {
+      api.deleteElement(mapId, elementId)
+        .done(ui.success)
+        .fail(ui.failure);
+    }
+  }
+};
+
+//delete the currently viewed map
+const onDeleteMap = function () {
+  //get the mapId
+  let mapId = api.appVar.app.map.id;
+
+  //use map id to find all elements of a map
+  if (mapId) {
+    api.seeElements(mapId)
+      .done(deleteElements)
+      .fail(ui.failure);
+  }
+};
+
 //place a thing
 const onMap = function () {
   //get the selected thing
@@ -261,6 +304,7 @@ const addHandlers = () => {
   $('#clear-board').on('click', onClearBoard);
   $('#see-all-maps').on('click', onSeeAllMaps);
   $('#load-map').on('click', onLoadMap);
+  $('#delete-map').on('click', onDeleteMap);
   $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();

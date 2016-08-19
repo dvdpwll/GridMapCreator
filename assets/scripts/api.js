@@ -87,14 +87,23 @@ const saveElement = (data, id) => $.ajax({
   data,
 });
 
-// //see one map by user and id
-// const deleteElement = (m, e) => $.ajax({
-//   url: appVar.app.api + 'maps/' + m + '/elements/' + e,
-//   method: 'DELETE',
-//   headers: {
-//     Authorization: 'Token token=' + appVar.app.user.token,
-//   },
-// });
+//delete an element
+const deleteElement = (m, e) => $.ajax({
+  url: appVar.app.api + 'maps/' + m + '/elements/' + e,
+  method: 'DELETE',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+});
+
+//delete a map
+const delMap = (m) => $.ajax({
+  url: appVar.app.api + 'maps/' + m,
+  method: 'DELETE',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+});
 
 module.exports = {
   signUp,
@@ -106,6 +115,7 @@ module.exports = {
   seeAllMaps,
   seeElements,
   saveElement,
-  // deleteElement,
+  deleteElement,
+  delMap,
   appVar,
 };
