@@ -175,18 +175,29 @@ const newElements = function (data) {
 
 //make a new map
 const onNewMap = function () {
-  //put info in data
-  let data = {
-    "map": {
-      "name": 'NewMap Test',
-      "user_id": api.appVar.app.user.id
-    }
-  };
+  //show new map modal
+  $('#new-map-modal').modal('show');
 
-  //send data to api
-  api.newMap(data)
-    .done(newElements)
-    .fail(ui.failure);
+  //on submit
+  $('#new-map-submit').on('click',function(){
+    //get text fields
+    let name = $('#new-map-id').val();
+    //put info in data
+    let data = {
+      "map": {
+        "name": name,
+        "user_id": api.appVar.app.user.id
+      }
+    };
+
+    //send data to api
+    api.newMap(data)
+      .done(newElements)
+      .fail(ui.failure);
+
+      //close modal
+      $('#new-map-modal').modal('hide');
+  });
 };
 
 //clear the board of all images
