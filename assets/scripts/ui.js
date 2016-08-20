@@ -60,11 +60,19 @@ const newElementSuccess = (data) => {
   console.log(appVar.app.elements);
 };
 
+//success for new element
+const nameChangeSuccess = (name) => {
+  console.log(name);
+
+  $('.mapName').empty();
+  $('.mapName').append("<h1>" + name + "</h1>");
+};
+
 module.exports = {
   success,
   failure,
   signInSuccess,
   signOutSuccess,
   newElementSuccess,
-  // newMapSuccess,
+  nameChangeSuccess,
 };

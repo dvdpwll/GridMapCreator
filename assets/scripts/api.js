@@ -105,6 +105,17 @@ const delMap = (m) => $.ajax({
   },
 });
 
+//patch the name of the map
+const patchMapName = (data, id) => $.ajax({
+  url: appVar.app.api + 'maps/' + id,
+  method: 'PATCH',
+  headers: {
+    Authorization: 'Token token=' + appVar.app.user.token,
+  },
+  //data: data,
+  data,
+});
+
 module.exports = {
   signUp,
   logIn,
@@ -117,5 +128,6 @@ module.exports = {
   saveElement,
   deleteElement,
   delMap,
+  patchMapName,
   appVar,
 };

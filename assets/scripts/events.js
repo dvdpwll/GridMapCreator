@@ -354,6 +354,36 @@ const onDeleteMap = function () {
   }
 };
 
+//change the map name
+const onChangeMapName = function () {
+  //show new map modal
+  $('#change-map-name-modal').modal('show');
+
+  //on submit
+  $('#change-map-name-submit').on('click',function(){
+    //get text fields
+    let name = $('#change-map-name-id').val();
+
+    //get map id
+    let id = api.appVar.app.map.id;
+
+    //put info in data
+    let data = {
+      "map": {
+        "name": name,
+      }
+    };
+
+    //send data to api
+    api.patchMapName(data, id)
+      .done(ui.nameChangeSuccess(name))
+      .fail(ui.failure);
+
+      //close modal
+      $('#change-map-name-modal').modal('hide');
+  });
+};
+
 //place a thing
 const onMap = function () {
   //get the selected thing
@@ -383,6 +413,7 @@ const addHandlers = () => {
   $('#new-map').on('click', onNewMap);
   $('#clear-board').on('click', onClearBoard);
   $('#see-all-maps').on('click', onSeeAllMaps);
+  $('#change-map-name').on('click', onChangeMapName);
   $('#load-map').on('click', onLoadMap);
   $('#delete-map').on('click', onDeleteMap);
   $('#save-map').hide();

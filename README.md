@@ -52,9 +52,6 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--update footer, make it smaller and lower? (2016 (c) David Powell)--currently looks like David Powell is the user
--make gridlines grey
--make map name editable after creation
 -add hover text/descriptors to selectors
 -add a title over the selectors ex. "Map Tiles"
 -after saving map, show popup/message confirming map was saved

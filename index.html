@@ -34,6 +34,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More Options<span class="caret"></span></a>
                 <!-- hide the dropdown menu later -->
                 <ul class="dropdown-menu">
+                  <li id="change-map-name"><a href="#">Change Map Name</a></li>
                   <li id="see-all-maps"><a href="#">List All Maps</a></li>
                   <li id="load-map"><a href="#">Load Map</a></li>
                   <li role="separator" class="divider"></li>
@@ -226,6 +227,30 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="new-map-submit">Submit</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- New Map  -->
+        <div id="change-map-name-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Map Name</h4>
+              </div>
+              <div class="modal-body">
+                <!-- map name -->
+                <div class="input-group">
+                  <span class="input-group-addon">Map Name</span>
+                  <input type="text" class="form-control"  id="change-map-name-id" placeholder="map name" aria-describedby="basic-addon1">
+                </div>
+                <!-- End input fields -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="change-map-name-submit">Submit</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
