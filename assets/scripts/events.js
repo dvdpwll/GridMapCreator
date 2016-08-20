@@ -171,6 +171,9 @@ const newElements = function (data) {
   $('.mapName').empty();
   $('.mapName').append("<h1>" + name + "</h1>");
 
+  //clear board
+  onClearBoard();
+
   //get map info
   let mapId = api.appVar.app.map.id;
 
