@@ -6,10 +6,6 @@ h1 {
   text-align: center;
 }
 
-footer {
-  text-align: center;
-}
-
 .gameboard {
   background-color: $pure-white;
   height: 250px;
@@ -33,4 +29,13 @@ footer {
   height: 25px;
   padding: 0;
   width: 25px;
+}
+
+.selectorsStart {
+  margin-top: 10px;
+}
+
+footer {
+  margin-top: 100px;
+  text-align: center;
 }

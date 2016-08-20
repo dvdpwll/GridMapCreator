@@ -52,7 +52,6 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--when a user is logged in, display username in nav bar somewhere
 -update footer, make it smaller and lower? (2016 (c) David Powell)--currently looks like David Powell is the user
 -make gridlines grey
 -make map name editable after creation

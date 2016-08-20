@@ -18,6 +18,9 @@ const signInSuccess = (data) => {
   appVar.app.user = data.user;
   console.log(appVar);
 
+  //change navbar brand to username
+  $('.navbar-brand').empty();
+  $('.navbar-brand').append(appVar.app.user.email);
 
   //hide/show certain buttons
   $('#save-map').show();
@@ -33,6 +36,10 @@ const signOutSuccess = () => {
   //remove saved user info
   delete appVar.app.user;
   console.log(appVar);
+
+  //change navbar brand to default
+  $('.navbar-brand').empty();
+  $('.navbar-brand').append('Map Maker');
 
   //hide/show certain buttons
   $('#save-map').hide();
