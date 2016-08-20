@@ -340,8 +340,10 @@ const deleteMap = function () {
 
   //delete map by id
   api.delMap(mapId)
-    .done(ui.success)
+    .done(ui.deleteMapSuccess)
     .fail(ui.failure);
+
+  onClearBoard();
 };
 
 //delete elements of map id

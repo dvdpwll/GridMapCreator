@@ -109,6 +109,22 @@ const passwordFailure = () => {
     $('#messages-body').append("Password not changed.");
 };
 
+//success for delete map
+const deleteMapSuccess = () => {
+  $('.mapName').empty();
+  $('.mapName').append("<h1>Map Title</h1>");
+
+  $('#messages-modal').modal('show');
+
+  //empty the body and title of messages modal
+  $('#messages-title').empty();
+  $('#messages-body').empty();
+
+  //add success to messages modal
+  $('#messages-title').append("Success!");
+  $('#messages-body').append("Map was deleted.");
+};
+
 module.exports = {
   success,
   failure,
@@ -119,4 +135,5 @@ module.exports = {
   saveElementsSuccess,
   passwordSuccess,
   passwordFailure,
+  deleteMapSuccess,
 };
