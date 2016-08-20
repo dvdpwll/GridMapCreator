@@ -49,6 +49,11 @@ const onSignUp = function () {
       .done(onLogIn2(email, password))
       .fail(ui.failure);
 
+    //clear text fields
+    $('#sign-up-email').val('');
+    $('#sign-up-password').val('');
+    $('#sign-up-confirm-password').val('');
+
     //close modal
     $('#sign-up-modal').modal('hide');
   });
@@ -77,6 +82,10 @@ const onLogIn = function () {
     api.logIn(data)
       .done(ui.signInSuccess)
       .fail(ui.failure);
+
+    //clear text field
+    $('#log-in-email').val('');
+    $('#log-in-password').val('');
 
     //close modal
     $('#log-in-modal').modal('hide');
@@ -114,6 +123,10 @@ const onChangePassword = function () {
     api.changePassword(data)
       .done(ui.passwordSuccess)
       .fail(ui.passwordFailure);
+
+    //clear text fields
+    $('#current-password').val('');
+    $('#new-password').val('');
 
     //close modal
     $('#change-password-modal').modal('hide');
@@ -210,6 +223,7 @@ const onNewMap = function () {
   $('#new-map-submit').on('click',function(){
     //get text fields
     let name = $('#new-map-id').val();
+
     //put info in data
     let data = {
       "map": {
@@ -223,8 +237,11 @@ const onNewMap = function () {
       .done(newElements)
       .fail(ui.failure);
 
-      //close modal
-      $('#new-map-modal').modal('hide');
+    //clear text fields
+    $('#new-map-id').val('');
+
+    //close modal
+    $('#new-map-modal').modal('hide');
   });
 };
 
@@ -308,6 +325,9 @@ const onLoadMap = function () {
       .done(displayMap)
       .fail(ui.failure);
 
+    //empty text field
+    $('#load-map-id').val('');
+
     //close modal
     $('#load-map-modal').modal('hide');
   });
@@ -386,8 +406,11 @@ const onChangeMapName = function () {
       .done(ui.nameChangeSuccess(name))
       .fail(ui.failure);
 
-      //close modal
-      $('#change-map-name-modal').modal('hide');
+    //clear text fields
+    $('#change-map-name-id').val('');
+
+    //close modal
+    $('#change-map-name-modal').modal('hide');
   });
 };
 
