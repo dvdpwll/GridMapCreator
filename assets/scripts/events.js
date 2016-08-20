@@ -3,8 +3,13 @@ const api = require('./api');
 const ui = require('./ui');
 
 //global variables, add new variables when adding new images
+let grassImg = '<img data-thing="grass" src="./assets/grass.png">';//change this if you change the img file for grass.
 let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
+let rocksImg = '<img data-thing="rocks" src="./assets/rocks.png">';//change this if you change the img file for rocks.
 let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
+let treesImg = '<img data-thing="trees" src="./assets/trees.png">';//change this if you change the img file for trees.
+let waterImg = '<img data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
+let water2Img = '<img data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
 
 //user log in
 const onLogIn2 = function (email, password) {
@@ -294,13 +299,33 @@ const displayMap = function (data) {
 
         //switch statement to place an image of thing
         switch(thing) {
+            case 'grass':
+                $(this).empty();
+                $(this).prepend(grassImg);
+                break;
             case 'rock':
                 $(this).empty();
                 $(this).prepend(rockImg);
                 break;
+            case 'rocks':
+                $(this).empty();
+                $(this).prepend(rocksImg);
+                break;
             case 'tree':
                 $(this).empty();
                 $(this).prepend(treeImg);
+                break;
+            case 'trees':
+                $(this).empty();
+                $(this).prepend(treesImg);
+                break;
+            case 'water':
+                $(this).empty();
+                $(this).prepend(waterImg);
+                break;
+            case 'water2':
+                $(this).empty();
+                $(this).prepend(water2Img);
                 break;
             default:
                 $(this).empty();
@@ -437,13 +462,33 @@ const onMap = function () {
 
   //switch statement to place an image of thing
   switch(selected) {
+      case 'grass':
+          $(this).empty();
+          $(this).prepend(grassImg);
+          break;
       case 'rock':
           $(this).empty();
           $(this).prepend(rockImg);
           break;
+      case 'rocks':
+          $(this).empty();
+          $(this).prepend(rocksImg);
+          break;
       case 'tree':
           $(this).empty();
           $(this).prepend(treeImg);
+          break;
+      case 'trees':
+          $(this).empty();
+          $(this).prepend(treesImg);
+          break;
+      case 'water':
+          $(this).empty();
+          $(this).prepend(waterImg);
+          break;
+      case 'water2':
+          $(this).empty();
+          $(this).prepend(water2Img);
           break;
       default:
           $(this).empty();
