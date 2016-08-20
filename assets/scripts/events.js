@@ -171,16 +171,14 @@ const newElements = function (data) {
   //save new map info
   api.appVar.app.map = data.map;
 
-  //get map name and add to screen
+  //get map name and id and add to screen
   let name = api.appVar.app.map.name;
+  let mapId = api.appVar.app.map.id;
   $('.mapName').empty();
-  $('.mapName').append("<h1>" + name + "</h1>");
+  $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
 
   //clear board
   onClearBoard();
-
-  //get map info
-  let mapId = api.appVar.app.map.id;
 
   //for each element make a data with a thing of none
   $('.square').each(function(){
@@ -262,8 +260,9 @@ const displayMap = function (data) {
 
   //get map name and add to screen
   let name = api.appVar.app.map.name;
+  let mapId = api.appVar.app.map.id;
   $('.mapName').empty();
-  $('.mapName').append("<h1>" + name + "</h1>");
+  $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
 
   //checks each square
   $('.square').each(function(){

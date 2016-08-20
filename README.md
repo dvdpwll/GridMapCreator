@@ -52,9 +52,6 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--update map name upon loading a map
--maybe also show map ID on page
--under Load Maps popup, add note about going to List All Maps
 -add error/confirm messag for passsword change errors
 -New Map field shows previous map name; should clear each time
 -Delete Map -- ask to confirm deleting map; then show status message
