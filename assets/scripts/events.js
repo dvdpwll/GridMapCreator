@@ -161,6 +161,11 @@ const onSaveMap = function () {
   });
 };
 
+//clear the board of all images
+const onClearBoard = function () {
+  $('.square').empty();
+};
+
 //make a new map
 const newElements = function (data) {
   //save new map info
@@ -225,11 +230,6 @@ const onNewMap = function () {
   });
 };
 
-//clear the board of all images
-const onClearBoard = function () {
-  $('.square').empty();
-};
-
 //display the maps in the all maps modal
 const displayAllMaps = function (data) {
   //empty the body of the show all maps modal
@@ -259,6 +259,11 @@ const onSeeAllMaps = function () {
 const displayMap = function (data) {
   //save map id
   api.appVar.app.map = data.elements[0].map;
+
+  //get map name and add to screen
+  let name = api.appVar.app.map.name;
+  $('.mapName').empty();
+  $('.mapName').append("<h1>" + name + "</h1>");
 
   //checks each square
   $('.square').each(function(){
