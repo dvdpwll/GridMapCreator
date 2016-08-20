@@ -371,7 +371,7 @@ const deleteElements = function (data) {
 };
 
 //delete the currently viewed map
-const onDeleteMap = function () {
+const onDeleteMap2 = function () {
   //get the mapId
   let mapId = api.appVar.app.map.id;
 
@@ -381,6 +381,20 @@ const onDeleteMap = function () {
       .done(deleteElements)
       .fail(ui.failure);
   }
+};
+
+//delete the currently viewed map confirm
+const onDeleteMap1 = function () {
+  // show confirm delete modal
+  $('#confirm-delete-modal').modal('show');
+
+  //on submit
+  $('#confirm-delete-submit').on('click',function(){
+    onDeleteMap2();
+
+    //close modal
+    $('#load-map-modal').modal('hide');
+  });
 };
 
 //change the map name
@@ -447,7 +461,7 @@ const addHandlers = () => {
   $('#see-all-maps').on('click', onSeeAllMaps);
   $('#change-map-name').on('click', onChangeMapName);
   $('#load-map').on('click', onLoadMap);
-  $('#delete-map').on('click', onDeleteMap);
+  $('#delete-map').on('click', onDeleteMap1);
   $('#save-map').hide();
   $('#new-map').hide();
   $('#clear-board').hide();

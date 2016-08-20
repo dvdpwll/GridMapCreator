@@ -52,7 +52,7 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--Delete Map -- ask to confirm deleting map; then show status message
+
 
 Wireframes: https://wireframe.cc/trdNcg
 
