@@ -112,8 +112,8 @@ const onChangePassword = function () {
 
     //send data to api
     api.changePassword(data)
-      .done(ui.success)
-      .fail(ui.failure);
+      .done(ui.passwordSuccess)
+      .fail(ui.passwordFailure);
 
     //close modal
     $('#change-password-modal').modal('hide');

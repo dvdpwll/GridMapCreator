@@ -52,7 +52,6 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--add error/confirm messag for passsword change errors
 -New Map field shows previous map name; should clear each time
 -Delete Map -- ask to confirm deleting map; then show status message
 -Delete Map -- reset/clear board and change name to default

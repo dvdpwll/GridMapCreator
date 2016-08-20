@@ -83,6 +83,32 @@ const saveElementsSuccess = (i) => {
   }
 };
 
+//success for spassword change
+const passwordSuccess = () => {
+    $('#messages-modal').modal('show');
+
+    //empty the body and title of messages modal
+    $('#messages-title').empty();
+    $('#messages-body').empty();
+
+    //add success to messages modal
+    $('#messages-title').append("Success!");
+    $('#messages-body').append("Password changed successfuly.");
+};
+
+//failure for password change
+const passwordFailure = () => {
+    $('#messages-modal').modal('show');
+
+    //empty the body and title of messages modal
+    $('#messages-title').empty();
+    $('#messages-body').empty();
+
+    //add success to messages modal
+    $('#messages-title').append("Error!");
+    $('#messages-body').append("Password not changed.");
+};
+
 module.exports = {
   success,
   failure,
@@ -91,4 +117,6 @@ module.exports = {
   newElementSuccess,
   nameChangeSuccess,
   saveElementsSuccess,
+  passwordSuccess,
+  passwordFailure,
 };
