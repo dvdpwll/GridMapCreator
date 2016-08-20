@@ -68,6 +68,21 @@ const nameChangeSuccess = (name) => {
   $('.mapName').append("<h1>" + name + "</h1>");
 };
 
+//success for save elements
+const saveElementsSuccess = (i) => {
+  if (i === 24) {
+    $('#messages-modal').modal('show');
+
+    //empty the body and title of messages modal
+    $('#messages-title').empty();
+    $('#messages-body').empty();
+
+    //add success to messages modal
+    $('#messages-title').append("Success!");
+    $('#messages-body').append("Map saved successfuly.");
+  }
+};
+
 module.exports = {
   success,
   failure,
@@ -75,4 +90,5 @@ module.exports = {
   signOutSuccess,
   newElementSuccess,
   nameChangeSuccess,
+  saveElementsSuccess,
 };

@@ -52,8 +52,6 @@ Thing to change in the future:
   -Independently variable lengths and widths
 -Generate a random map
 ***Taz's Comments**
--add hover text/descriptors to selectors
--add a title over the selectors ex. "Map Tiles"
 -after saving map, show popup/message confirming map was saved
 -new map needs to clear current map
 -update map name upon loading a map

@@ -121,7 +121,7 @@ const onChangePassword = function () {
 };
 
 //send save data
-const sendSave = function (t, id) {
+const sendSave = function (t, id, i) {
   //put info in data object
   let data = {
     "element": {
@@ -131,7 +131,7 @@ const sendSave = function (t, id) {
 
   //send data and data id to api
   api.saveElement(data, id)
-    .done(ui.success)
+    .done(ui.saveElementsSuccess(i))
     .fail(ui.failure);
 };
 
@@ -150,10 +150,10 @@ const onSaveMap = function () {
 
     //if an image exists then send thing, if no img then send none
     if (thing) {
-      sendSave(thing, id);
+      sendSave(thing, id, i);
     }
     else {
-      sendSave('none', id);
+      sendSave('none', id, i);
     }
 
     //increment

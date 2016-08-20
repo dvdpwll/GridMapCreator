@@ -93,19 +93,20 @@
       </div>
       <!-- GAMEBOARD -->
       <!-- SELECTOR -->
-      <div class="text-center">
-        <div class="btn-group selector-group  selectorsStart" data-toggle="buttons">
+      <div class="text-center selectorsStart">
+        <p>Objects Selector</p>
+        <div class="btn-group selector-group" data-toggle="buttons">
           <label class="btn btn-primary active">
             <input type="radio" name="thing" value="none" id="none" autocomplete="off" checked>
-            <img class="selectors" src="./assets/none.png" alt="none" />
+            <img class="selectors" title="remove" src="./assets/none.png" alt="none" />
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="thing" value="rock" id="rock" autocomplete="off">
-            <img class="selectors" src="./assets/rock.png" alt="rock" />
+            <img class="selectors" title="rock" src="./assets/rock.png" alt="rock" />
           </label>
           <label class="btn btn-primary">
             <input type="radio" name="thing" value="tree" id="tree" autocomplete="off">
-            <img class="selectors" src="./assets/tree.png" alt="tree" />
+            <img class="selectors" title="tree" src="./assets/tree.png" alt="tree" />
           </label>
         </div>
       </div>
@@ -290,6 +291,24 @@
               </div>
               <div class="modal-body" id="show-all-maps-body">
                 <!-- js will insert all maps here -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Messages Modal -->
+        <div id="messages-modal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 id="messages-title" class="modal-title">Messages</h4>
+              </div>
+              <div class="modal-body" id="messages-body">
+                <!-- js will insert a message here, error or success -->
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
