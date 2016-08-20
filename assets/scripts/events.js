@@ -6,6 +6,23 @@ const ui = require('./ui');
 let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
 let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
 
+//user log in
+const onLogIn2 = function (email, password) {
+    //put information into data object
+    let data = {
+      "credentials": {
+        "email": email,
+        "password": password,
+      }
+    };
+    console.log(data);
+
+    //send data to api
+    api.logIn(data)
+      .done(ui.signInSuccess)
+      .fail(ui.failure);
+};
+
 //user sign up
 const onSignUp = function () {
   //open sign up modal
@@ -29,7 +46,7 @@ const onSignUp = function () {
 
     //send data to api
     api.signUp(data)
-      .done(ui.success)
+      .done(onLogIn2(email, password))
       .fail(ui.failure);
 
     //close modal

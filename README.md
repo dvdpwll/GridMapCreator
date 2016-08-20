@@ -51,6 +51,22 @@ Thing to change in the future:
 -Variable map sizes
   -Independently variable lengths and widths
 -Generate a random map
+***Taz's Comments**
+-when a user is logged in, display username in nav bar somewhere
+-update footer, make it smaller and lower? (2016 (c) David Powell)--currently looks like David Powell is the user
+-make gridlines grey
+-make map name editable after creation
+-add hover text/descriptors to selectors
+-add a title over the selectors ex. "Map Tiles"
+-after saving map, show popup/message confirming map was saved
+-new map needs to clear current map
+-update map name upon loading a map
+-maybe also show map ID on page
+-under Load Maps popup, add note about going to List All Maps
+-add error/confirm messag for passsword change errors
+-New Map field shows previous map name; should clear each time
+-Delete Map -- ask to confirm deleting map; then show status message
+-Delete Map -- reset/clear board and change name to default
 
 Wireframes: https://wireframe.cc/trdNcg
 
