@@ -303,15 +303,15 @@ const onNewMap = function () {
     let height = $('#new-map-height').val();
 
     //min and max for length
-    if (length > 10) {
-      length = 10;
+    if (length > 12) {
+      length = 12;
     }
     if (length < 2) {
       length = 2;
     }
     //min and max for height
-    if (height > 10) {
-      height = 10;
+    if (height > 12) {
+      height = 12;
     }
     if (height < 2) {
       height = 2;
