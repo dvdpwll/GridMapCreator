@@ -50,7 +50,9 @@ Thing to change in the future:
 -Convert to a pdf so that you can print it.
   -(maybe you don't have to convert to pdf to make it printable.)
 -Variable map sizes
-  -Independently variable lengths and widths
+  -Independently variable lengths and widths (done)
+  -make sure all map sizes are centered
+  -make load map also variable
 -Generate a random map
 
 

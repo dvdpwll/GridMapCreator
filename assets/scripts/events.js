@@ -195,27 +195,24 @@ const sendSave = function (t, id, i) {
 
 //save a map
 const onSaveMap = function () {
-  //increment
-  let i = 0;
-
   //checks each square
   $('.square').each(function(){
+    //get order number
+    let order = $(this).data('square');
+
     //get id of element
-    let id = api.appVar.app.elements[i];
+    let id = api.appVar.app.elements[order];
 
     //extracts the data-thing value from the img
     let thing = $(this).children().data('thing');
 
     //if an image exists then send thing, if no img then send none
     if (thing) {
-      sendSave(thing, id, i);
+      sendSave(thing, id, order);
     }
     else {
-      sendSave('none', id, i);
+      sendSave('none', id, order);
     }
-
-    //increment
-    i++;
   });
 };
 
@@ -235,16 +232,17 @@ const createGrid = function (l, h) {
   for (let i = 0; i < h; i++) {
     $('.gameboard').append('<div class="row"></div>');
   }
-
+  let o = 0;
   $('.row').each(function(){
     //create the columns of the grid in each row
     for (let i = 0; i < l; i++) {
-      $(this).append('<div id="T' + i + '" class="col-xs-1 square" data-square="' + i + '" data-image="0"></div>');
+      $(this).append('<div id="T' + o + '" class="col-xs-1 square" data-square="' + o + '" data-image="0"></div>');
+      o++;
     }
   });
 };
 
-//erase the grid
+//add grid handlers
 const addGridHandlers = function () {
   $('.square').on('click', onMap);
 };
@@ -264,21 +262,24 @@ const newElements = function (data) {
 
   //clear board
   onClearBoard();
+  //remove grid
   eraseGrid();
+  //create new grid
   createGrid(length, height);
+  //make grid clickable
   addGridHandlers();
 
 
   //for each element make a data with a thing of none
   $('.square').each(function(){
     //get index of square
-    let i = $(this).data('square');
+    let order = $(this).data('square');
 
     //put info in data
     let data = {
       "element": {
         "thing": 'none',
-        "order": i,
+        "order": order,
         "map_id": mapId
       }
     };
@@ -374,11 +375,36 @@ const displayMap = function (data) {
   //save map id
   api.appVar.app.map = data.elements[0].map;
 
+  //save elements id for later save
+  console.log('data');
+  console.log(data);
+  for (let i = 0; i < data.elements.length; i++) {
+    let order = data.elements[i].order;
+    console.log('current order #');
+    console.log(order);
+    api.appVar.app.elements[order] = data.elements[i].id;
+    console.log('current data element id');
+    console.log(data.elements[i].id);
+  }
+  console.log('app.elemtns array');
+  console.log(api.appVar.app.elements);
+
   //get map name and add to screen
   let name = api.appVar.app.map.name;
   let mapId = api.appVar.app.map.id;
+  let length = api.appVar.app.map.length;
+  let height = api.appVar.app.map.height;
   $('.mapName').empty();
   $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
+
+  //clear board
+  onClearBoard();
+  //remove grid
+  eraseGrid();
+  //create new grid
+  createGrid(length, height);
+  //make grid clickable
+  addGridHandlers();
 
   //checks each square
   $('.square').each(function(){
