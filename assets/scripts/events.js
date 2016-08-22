@@ -240,6 +240,14 @@ const createGrid = function (l, h) {
       o++;
     }
   });
+
+  //change height of gameboard
+  let varHeight = h * 50;
+  $('.gameboard').css('height', varHeight + 'px');
+
+  // center the gameboard by changeing the width
+  let varLength = l * 50;
+  $('.gameboard').css('max-width', varLength + 'px');
 };
 
 //add grid handlers
