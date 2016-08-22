@@ -26,16 +26,17 @@ Elements:
 -map_id: reference
 
 Devolopment:
--Create the wireframe.
-  -Start off with a grid of 5x5, go to 10x10 eventually.
--Create the database using rails
-  -Make a user(rails makes this)
-  -Make a maps table
--Create ajax for user
--Create logic for clicking on the grid
--Create ajax for maps
--Include graphics for grid (trees, rocks, grass)
--Clean up code and make pretty
+-Create the wireframe. (done)
+  -Start off with a grid of 5x5, go to 10x10 eventually. (done)
+-Create the database using rails (done)
+  -Make a user(rails makes this) (done)
+  -Make a maps table (done)
+  -Make an elemetns table. (done)
+-Create ajax for user (done)
+-Create logic for clicking on the grid (done)
+-Create ajax for maps (done)
+-Include graphics for grid (trees, rocks, grass) (done)
+-Clean up code and make pretty (done)
 
 Thing to change in the future:
 -Search for other people's maps
@@ -51,7 +52,6 @@ Thing to change in the future:
 -Variable map sizes
   -Independently variable lengths and widths
 -Generate a random map
-***Taz's Comments**
 
 
 Wireframes: https://wireframe.cc/trdNcg
