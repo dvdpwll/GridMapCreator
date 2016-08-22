@@ -405,7 +405,7 @@ webpackJsonp([0],[
 	    var elementId = data.elements[i].id;
 
 	    //if last element delete map, else continue to delete elements
-	    if (i === 24) {
+	    if (i === data.elements.length - 1) {
 	      api.deleteElement(mapId, elementId).done(deleteMap).fail(ui.failure);
 	    } else {
 	      api.deleteElement(mapId, elementId).done(ui.success).fail(ui.failure);
@@ -417,6 +417,7 @@ webpackJsonp([0],[
 	var onDeleteMap2 = function onDeleteMap2() {
 	  //get the mapId
 	  var mapId = api.appVar.app.map.id;
+	  console.log('delete2');
 
 	  //use map id to find all elements of a map
 	  if (mapId) {
@@ -600,7 +601,7 @@ webpackJsonp([0],[
 	    onDeleteMap2();
 
 	    //close modal
-	    $('#load-map-modal').modal('hide');
+	    $('#confirm-delete-modal').modal('hide');
 	  });
 
 	  //on submit
