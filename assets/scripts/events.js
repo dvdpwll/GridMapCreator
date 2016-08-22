@@ -228,14 +228,20 @@ const onNewMap = function () {
   $('#new-map-submit').on('click',function(){
     //get text fields
     let name = $('#new-map-id').val();
+    let length = $('#new-map-length').val();
+    let height = $('#new-map-height').val();
 
     //put info in data
     let data = {
       "map": {
         "name": name,
+        "length": length,
+        "height": height,
         "user_id": api.appVar.app.user.id
       }
     };
+
+    console.log(data);
 
     //send data to api
     api.newMap(data)
@@ -244,6 +250,8 @@ const onNewMap = function () {
 
     //clear text fields
     $('#new-map-id').val('');
+    $('#new-map-length').val('');
+    $('#new-map-height').val('');
 
     //close modal
     $('#new-map-modal').modal('hide');
