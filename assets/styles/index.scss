@@ -8,14 +8,14 @@ h1 {
 
 .gameboard {
   background-color: $pure-white;
-  height: 600px;
-  max-width: 600px;
+  height: 250px;
+  max-width: 250px;
 }
 
 .square {
   border: 1px solid $grid-lines;
-  height: 50px;
-  max-width: 50px;
+  min-height: 50px;
+  min-width: 50px;
   padding: 0;
 }
 
