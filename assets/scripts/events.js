@@ -377,7 +377,7 @@ const deleteElements = function (data) {
     let elementId = data.elements[i].id;
 
     //if last element delete map, else continue to delete elements
-    if (i === 24) {
+    if (i === (data.elements.length - 1)) {
       api.deleteElement(mapId, elementId)
         .done(deleteMap)
         .fail(ui.failure);
@@ -394,6 +394,7 @@ const deleteElements = function (data) {
 const onDeleteMap2 = function () {
   //get the mapId
   let mapId = api.appVar.app.map.id;
+  console.log('delete2');
 
   //use map id to find all elements of a map
   if (mapId) {
@@ -593,7 +594,7 @@ const addHandlers = () => {
     onDeleteMap2();
 
     //close modal
-    $('#load-map-modal').modal('hide');
+    $('#confirm-delete-modal').modal('hide');
   });
 
   //on submit
