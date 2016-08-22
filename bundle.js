@@ -65,6 +65,7 @@ webpackJsonp([0],[
 
 	//user log in
 	var onLogIn2 = function onLogIn2(email, password) {
+
 	  //put information into data object
 	  var data = {
 	    "credentials": {
@@ -72,6 +73,7 @@ webpackJsonp([0],[
 	      "password": password
 	    }
 	  };
+	  console.log('log in 2');
 	  console.log(data);
 
 	  //send data to api
@@ -81,66 +83,15 @@ webpackJsonp([0],[
 	//user sign up
 	var onSignUp = function onSignUp() {
 	  //open sign up modal
+
 	  $('#sign-up-modal').modal('show');
-
-	  //on submit
-	  $('#sign-up-submit').on('click', function () {
-	    //get text fields
-	    var email = $('#sign-up-email').val();
-	    var password = $('#sign-up-password').val();
-	    var password_confirmation = $('#sign-up-confirm-password').val();
-
-	    //put information into data object
-	    var data = {
-	      "credentials": {
-	        "email": email,
-	        "password": password,
-	        "password_confirmation": password_confirmation
-	      }
-	    };
-
-	    //send data to api
-	    api.signUp(data).done(onLogIn2(email, password)).fail(ui.failure);
-
-	    //clear text fields
-	    $('#sign-up-email').val('');
-	    $('#sign-up-password').val('');
-	    $('#sign-up-confirm-password').val('');
-
-	    //close modal
-	    $('#sign-up-modal').modal('hide');
-	  });
 	};
 
 	//user log in
 	var onLogIn = function onLogIn() {
+
 	  //show login modal
 	  $('#log-in-modal').modal('show');
-
-	  //on submit
-	  $('#log-in-submit').on('click', function () {
-	    //get text fields
-	    var email = $('#log-in-email').val();
-	    var password = $('#log-in-password').val();
-
-	    //put information into data object
-	    var data = {
-	      "credentials": {
-	        "email": email,
-	        "password": password
-	      }
-	    };
-
-	    //send data to api
-	    api.logIn(data).done(ui.signInSuccess).fail(ui.failure);
-
-	    //clear text field
-	    $('#log-in-email').val('');
-	    $('#log-in-password').val('');
-
-	    //close modal
-	    $('#log-in-modal').modal('hide');
-	  });
 	};
 
 	//user log out
@@ -153,31 +104,6 @@ webpackJsonp([0],[
 	var onChangePassword = function onChangePassword() {
 	  //show change password modal
 	  $('#change-password-modal').modal('show');
-
-	  //on submit
-	  $('#change-password-submit').on('click', function () {
-	    //get text fields
-	    var oldPassword = $('#current-password').val();
-	    var NewPassword = $('#new-password').val();
-
-	    //put info in data object
-	    var data = {
-	      "passwords": {
-	        "old": oldPassword,
-	        "new": NewPassword
-	      }
-	    };
-
-	    //send data to api
-	    api.changePassword(data).done(ui.passwordSuccess).fail(ui.passwordFailure);
-
-	    //clear text fields
-	    $('#current-password').val('');
-	    $('#new-password').val('');
-
-	    //close modal
-	    $('#change-password-modal').modal('hide');
-	  });
 	};
 
 	//place a thing
@@ -296,6 +222,7 @@ webpackJsonp([0],[
 
 	//make a new map
 	var newElements = function newElements(data) {
+
 	  //save new map info
 	  api.appVar.app.map = data.map;
 
@@ -337,54 +264,9 @@ webpackJsonp([0],[
 
 	//make a new map
 	var onNewMap = function onNewMap() {
+
 	  //show new map modal
 	  $('#new-map-modal').modal('show');
-
-	  //on submit
-	  $('#new-map-submit').on('click', function () {
-	    //get text fields
-	    var name = $('#new-map-id').val();
-	    var length = $('#new-map-length').val();
-	    var height = $('#new-map-height').val();
-
-	    //min and max for length
-	    if (length > 12) {
-	      length = 12;
-	    }
-	    if (length < 2) {
-	      length = 2;
-	    }
-	    //min and max for height
-	    if (height > 12) {
-	      height = 12;
-	    }
-	    if (height < 2) {
-	      height = 2;
-	    }
-
-	    //put info in data
-	    var data = {
-	      "map": {
-	        "name": name,
-	        "length": length,
-	        "height": height,
-	        "user_id": api.appVar.app.user.id
-	      }
-	    };
-
-	    console.log(data);
-
-	    //send data to api
-	    api.newMap(data).done(newElements).fail(ui.failure);
-
-	    //clear text fields
-	    $('#new-map-id').val('');
-	    $('#new-map-length').val('');
-	    $('#new-map-height').val('');
-
-	    //close modal
-	    $('#new-map-modal').modal('hide');
-	  });
 	};
 
 	//display the maps in the all maps modal
@@ -499,21 +381,6 @@ webpackJsonp([0],[
 	var onLoadMap = function onLoadMap() {
 	  //show load map modal
 	  $('#load-map-modal').modal('show');
-
-	  //on submit
-	  $('#load-map-submit').on('click', function () {
-	    //get text field
-	    var mapId = $('#load-map-id').val();
-
-	    //get map by id
-	    api.seeElements(mapId).done(displayMap).fail(ui.failure);
-
-	    //empty text field
-	    $('#load-map-id').val('');
-
-	    //close modal
-	    $('#load-map-modal').modal('hide');
-	  });
 	};
 
 	//delete the map after finished deleteing all elements
@@ -561,6 +428,172 @@ webpackJsonp([0],[
 	var onDeleteMap1 = function onDeleteMap1() {
 	  // show confirm delete modal
 	  $('#confirm-delete-modal').modal('show');
+	};
+
+	//change the map name
+	var onChangeMapName = function onChangeMapName() {
+	  //show new map modal
+	  $('#change-map-name-modal').modal('show');
+	};
+
+	var addHandlers = function addHandlers() {
+	  $('#sign-up').on('click', onSignUp);
+	  $('#log-in').on('click', onLogIn);
+	  $('#log-out').on('click', onLogOut);
+	  $('#change-password').on('click', onChangePassword);
+	  $('#save-map').on('click', onSaveMap);
+	  $('#new-map').on('click', onNewMap);
+	  $('#clear-board').on('click', onClearBoard);
+	  $('#see-all-maps').on('click', onSeeAllMaps);
+	  $('#change-map-name').on('click', onChangeMapName);
+	  $('#load-map').on('click', onLoadMap);
+	  $('#delete-map').on('click', onDeleteMap1);
+	  $('#save-map').hide();
+	  $('#new-map').hide();
+	  $('#clear-board').hide();
+	  $('.dropdown-toggle').hide();
+	  addGridHandlers();
+	  //on submit
+	  $('#sign-up-submit').on('click', function () {
+	    //get text fields
+
+	    var email = $('#sign-up-email').val();
+	    var password = $('#sign-up-password').val();
+	    var password_confirmation = $('#sign-up-confirm-password').val();
+
+	    //put information into data object
+	    var data = {
+	      "credentials": {
+	        "email": email,
+	        "password": password,
+	        "password_confirmation": password_confirmation
+	      }
+	    };
+
+	    //send data to api
+	    api.signUp(data).done(onLogIn2(email, password)).fail(ui.failure);
+
+	    //clear text fields
+	    $('#sign-up-email').val('');
+	    $('#sign-up-password').val('');
+	    $('#sign-up-confirm-password').val('');
+
+	    //close modal
+	    $('#sign-up-modal').modal('hide');
+	  });
+
+	  //on submit
+	  $('#log-in-submit').on('click', function () {
+
+	    //get text fields
+	    var email = $('#log-in-email').val();
+	    var password = $('#log-in-password').val();
+
+	    //put information into data object
+	    var data = {
+	      "credentials": {
+	        "email": email,
+	        "password": password
+	      }
+	    };
+
+	    //send data to api
+	    api.logIn(data).done(ui.signInSuccess).fail(ui.failure);
+
+	    //clear text field
+	    $('#log-in-email').val('');
+	    $('#log-in-password').val('');
+
+	    //close modal
+	    $('#log-in-modal').modal('hide');
+	  });
+
+	  //on submit
+	  $('#change-password-submit').on('click', function () {
+	    //get text fields
+	    var oldPassword = $('#current-password').val();
+	    var NewPassword = $('#new-password').val();
+
+	    //put info in data object
+	    var data = {
+	      "passwords": {
+	        "old": oldPassword,
+	        "new": NewPassword
+	      }
+	    };
+
+	    //send data to api
+	    api.changePassword(data).done(ui.passwordSuccess).fail(ui.passwordFailure);
+
+	    //clear text fields
+	    $('#current-password').val('');
+	    $('#new-password').val('');
+
+	    //close modal
+	    $('#change-password-modal').modal('hide');
+	  });
+
+	  //on submit
+	  $('#new-map-submit').on('click', function () {
+
+	    //get text fields
+	    var name = $('#new-map-id').val();
+	    var length = $('#new-map-length').val();
+	    var height = $('#new-map-height').val();
+
+	    //min and max for length
+	    if (length > 12) {
+	      length = 12;
+	    }
+	    if (length < 2) {
+	      length = 2;
+	    }
+	    //min and max for height
+	    if (height > 12) {
+	      height = 12;
+	    }
+	    if (height < 2) {
+	      height = 2;
+	    }
+
+	    //put info in data
+	    var data = {
+	      "map": {
+	        "name": name,
+	        "length": length,
+	        "height": height,
+	        "user_id": api.appVar.app.user.id
+	      }
+	    };
+
+	    console.log(data);
+
+	    //send data to api
+	    api.newMap(data).done(newElements).fail(ui.failure);
+
+	    //clear text fields
+	    $('#new-map-id').val('');
+	    $('#new-map-length').val('');
+	    $('#new-map-height').val('');
+
+	    //close modal
+	    $('#new-map-modal').modal('hide');
+	  });
+
+	  //on submit
+	  $('#load-map-submit').on('click', function () {
+	    //get text field
+	    var mapId = $('#load-map-id').val();
+
+	    //get map by id
+	    api.seeElements(mapId).done(displayMap).fail(ui.failure);
+
+	    //empty text field
+	    $('#load-map-id').val('');
+
+	    //close modal
+	    $('#load-map-modal').modal('hide');
+	  });
 
 	  //on submit
 	  $('#confirm-delete-submit').on('click', function () {
@@ -569,12 +602,6 @@ webpackJsonp([0],[
 	    //close modal
 	    $('#load-map-modal').modal('hide');
 	  });
-	};
-
-	//change the map name
-	var onChangeMapName = function onChangeMapName() {
-	  //show new map modal
-	  $('#change-map-name-modal').modal('show');
 
 	  //on submit
 	  $('#change-map-name-submit').on('click', function () {
@@ -600,25 +627,6 @@ webpackJsonp([0],[
 	    //close modal
 	    $('#change-map-name-modal').modal('hide');
 	  });
-	};
-
-	var addHandlers = function addHandlers() {
-	  $('#sign-up').on('click', onSignUp);
-	  $('#log-in').on('click', onLogIn);
-	  $('#log-out').on('click', onLogOut);
-	  $('#change-password').on('click', onChangePassword);
-	  $('#save-map').on('click', onSaveMap);
-	  $('#new-map').on('click', onNewMap);
-	  $('#clear-board').on('click', onClearBoard);
-	  $('#see-all-maps').on('click', onSeeAllMaps);
-	  $('#change-map-name').on('click', onChangeMapName);
-	  $('#load-map').on('click', onLoadMap);
-	  $('#delete-map').on('click', onDeleteMap1);
-	  $('#save-map').hide();
-	  $('#new-map').hide();
-	  $('#clear-board').hide();
-	  $('.dropdown-toggle').hide();
-	  addGridHandlers();
 	};
 
 	module.exports = {
@@ -798,8 +806,8 @@ webpackJsonp([0],[
 
 	var app = {
 	  //api: 'http://httpbin.org',
-	  // api: 'http://localhost:3000/',
-	  api: 'https://murmuring-harbor-68088.herokuapp.com/',
+	  api: 'http://localhost:3000/',
+	  // api: 'https://murmuring-harbor-68088.herokuapp.com/',
 	  elements: []
 	};
 
