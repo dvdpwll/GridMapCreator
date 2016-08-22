@@ -138,6 +138,46 @@ const onChangePassword = function () {
   });
 };
 
+//place a thing
+const onMap = function () {
+  //get the selected thing
+  let selected = $("input[name='thing']:checked").val();
+
+  //switch statement to place an image of thing
+  switch(selected) {
+      case 'grass':
+          $(this).empty();
+          $(this).prepend(grassImg);
+          break;
+      case 'rock':
+          $(this).empty();
+          $(this).prepend(rockImg);
+          break;
+      case 'rocks':
+          $(this).empty();
+          $(this).prepend(rocksImg);
+          break;
+      case 'tree':
+          $(this).empty();
+          $(this).prepend(treeImg);
+          break;
+      case 'trees':
+          $(this).empty();
+          $(this).prepend(treesImg);
+          break;
+      case 'water':
+          $(this).empty();
+          $(this).prepend(waterImg);
+          break;
+      case 'water2':
+          $(this).empty();
+          $(this).prepend(water2Img);
+          break;
+      default:
+          $(this).empty();
+  }
+};
+
 //send save data
 const sendSave = function (t, id, i) {
   //put info in data object
@@ -184,6 +224,31 @@ const onClearBoard = function () {
   $('.square').empty();
 };
 
+//erase the grid
+const eraseGrid = function () {
+  $('.gameboard').empty();
+};
+
+//create new grid
+const createGrid = function (l, h) {
+  //create the rows of the grid
+  for (let i = 0; i < h; i++) {
+    $('.gameboard').append('<div class="row"></div>');
+  }
+
+  $('.row').each(function(){
+    //create the columns of the grid in each row
+    for (let i = 0; i < l; i++) {
+      $(this).append('<div id="T' + i + '" class="col-xs-1 square" data-square="' + i + '" data-image="0"></div>');
+    }
+  });
+};
+
+//erase the grid
+const addGridHandlers = function () {
+  $('.square').on('click', onMap);
+};
+
 //make a new map
 const newElements = function (data) {
   //save new map info
@@ -192,11 +257,17 @@ const newElements = function (data) {
   //get map name and id and add to screen
   let name = api.appVar.app.map.name;
   let mapId = api.appVar.app.map.id;
+  let length = api.appVar.app.map.length;
+  let height = api.appVar.app.map.height;
   $('.mapName').empty();
   $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
 
   //clear board
   onClearBoard();
+  eraseGrid();
+  createGrid(length, height);
+  addGridHandlers();
+
 
   //for each element make a data with a thing of none
   $('.square').each(function(){
@@ -230,6 +301,21 @@ const onNewMap = function () {
     let name = $('#new-map-id').val();
     let length = $('#new-map-length').val();
     let height = $('#new-map-height').val();
+
+    //min and max for length
+    if (length > 10) {
+      length = 10;
+    }
+    if (length < 2) {
+      length = 2;
+    }
+    //min and max for height
+    if (height > 10) {
+      height = 10;
+    }
+    if (height < 2) {
+      height = 2;
+    }
 
     //put info in data
     let data = {
@@ -463,46 +549,6 @@ const onChangeMapName = function () {
   });
 };
 
-//place a thing
-const onMap = function () {
-  //get the selected thing
-  let selected = $("input[name='thing']:checked").val();
-
-  //switch statement to place an image of thing
-  switch(selected) {
-      case 'grass':
-          $(this).empty();
-          $(this).prepend(grassImg);
-          break;
-      case 'rock':
-          $(this).empty();
-          $(this).prepend(rockImg);
-          break;
-      case 'rocks':
-          $(this).empty();
-          $(this).prepend(rocksImg);
-          break;
-      case 'tree':
-          $(this).empty();
-          $(this).prepend(treeImg);
-          break;
-      case 'trees':
-          $(this).empty();
-          $(this).prepend(treesImg);
-          break;
-      case 'water':
-          $(this).empty();
-          $(this).prepend(waterImg);
-          break;
-      case 'water2':
-          $(this).empty();
-          $(this).prepend(water2Img);
-          break;
-      default:
-          $(this).empty();
-  }
-};
-
 const addHandlers = () => {
   $('#sign-up').on('click', onSignUp);
   $('#log-in').on('click', onLogIn);
@@ -519,31 +565,8 @@ const addHandlers = () => {
   $('#new-map').hide();
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();
-  $('#T00').on('click', onMap);
-  $('#T01').on('click', onMap);
-  $('#T02').on('click', onMap);
-  $('#T03').on('click', onMap);
-  $('#T04').on('click', onMap);
-  $('#T05').on('click', onMap);
-  $('#T06').on('click', onMap);
-  $('#T07').on('click', onMap);
-  $('#T08').on('click', onMap);
-  $('#T09').on('click', onMap);
-  $('#T10').on('click', onMap);
-  $('#T11').on('click', onMap);
-  $('#T12').on('click', onMap);
-  $('#T13').on('click', onMap);
-  $('#T14').on('click', onMap);
-  $('#T15').on('click', onMap);
-  $('#T16').on('click', onMap);
-  $('#T17').on('click', onMap);
-  $('#T18').on('click', onMap);
-  $('#T19').on('click', onMap);
-  $('#T20').on('click', onMap);
-  $('#T21').on('click', onMap);
-  $('#T22').on('click', onMap);
-  $('#T23').on('click', onMap);
-  $('#T24').on('click', onMap);
+  addGridHandlers();
+
 };
 
 module.exports = {
