@@ -11,9 +11,14 @@ let treesImg = '<img data-thing="trees" src="./assets/trees.png">';//change this
 let waterImg = '<img data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
 let water2Img = '<img data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
 
-//user log in
-const onLogIn2 = function (email, password) {
+//-----------Functions-----------//
+//show sign up modal
+const onSignUp = function () {
+  $('#sign-up-modal').modal('show');
+};
 
+//sign user in after sign up
+const LogInAfterSignUp = function (email, password) {
     //put information into data object
     let data = {
       "credentials": {
@@ -21,8 +26,6 @@ const onLogIn2 = function (email, password) {
         "password": password,
       }
     };
-    console.log('log in 2');
-    console.log(data);
 
     //send data to api
     api.logIn(data)
@@ -30,14 +33,54 @@ const onLogIn2 = function (email, password) {
       .fail(ui.failure);
 };
 
-//user sign up
-const onSignUp = function () {
-  //open sign up modal
+//send sign up data
+const onSignUpSubmit = function () {
+  //get text fields
+  let email = $('#sign-up-email').val();
+  let password = $('#sign-up-password').val();
+  let password_confirmation = $('#sign-up-confirm-password').val();
 
-  $('#sign-up-modal').modal('show');
+  //put information into data object
+  let data = {
+    "credentials": {
+      "email": email,
+      "password": password,
+      "password_confirmation": password_confirmation
+    }
+  };
 
+  //send data to api
+  api.signUp(data)
+    .done(LogInAfterSignUp(email, password))
+    .fail(ui.failure);
 
+  //clear text fields
+  $('#sign-up-email').val('');
+  $('#sign-up-password').val('');
+  $('#sign-up-confirm-password').val('');
+
+  //close modal
+  $('#sign-up-modal').modal('hide');
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------End Functions-----------//
+
+
 
 //user log in
 const onLogIn = function () {
@@ -240,13 +283,25 @@ const displayAllMaps = function (data) {
   //empty the body of the show all maps modal
   $('#show-all-maps-body').empty();
 
-  //add header for list
-  $('#show-all-maps-body').append("<p>Map #:    Name: </p>");
+  let listMapsTemplate = require('./templates/listMaps.handlebars');
+  $('#show-all-maps-body').html(listMapsTemplate({
+    maps: data.maps,
+  }));
+
+
+
+  // const displayUsers = function(data){
+  //   console.log(data);
+  //   let userTemplate = require('./templates/user.handlebars');
+  //   $('.sidebar-nav').html(userTemplate({
+  //       users: data.users,
+  //     }));
+
 
   //add info for each map for user
-  for (let i = 0; i < data.maps.length; i++) {
-    $('#show-all-maps-body').append("<p>" + data.maps[i].id + " " +  data.maps[i].name + "</p>");
-  }
+  // for (let i = 0; i < data.maps.length; i++) {
+  //   $('#show-all-maps-body').append("<p>" + data.maps[i].id + " " +  data.maps[i].name + "</p>");
+  // }
 };
 
 //see all maps the user has made
@@ -262,6 +317,8 @@ const onSeeAllMaps = function () {
 
 //display one map
 const displayMap = function (data) {
+  $('#show-all-maps-modal').modal('hide');
+
   //save map id
   api.appVar.app.map = data.elements[0].map;
 
@@ -275,73 +332,73 @@ const displayMap = function (data) {
     api.appVar.app.elements[order] = data.elements[i].id;
     console.log('current data element id');
     console.log(data.elements[i].id);
-  }
-  console.log('app.elemtns array');
-  console.log(api.appVar.app.elements);
+    }
+    console.log('app.elemtns array');
+    console.log(api.appVar.app.elements);
 
-  //get map name and add to screen
-  let name = api.appVar.app.map.name;
-  let mapId = api.appVar.app.map.id;
-  let length = api.appVar.app.map.length;
-  let height = api.appVar.app.map.height;
-  $('.mapName').empty();
-  $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
+    //get map name and add to screen
+    let name = api.appVar.app.map.name;
+    let mapId = api.appVar.app.map.id;
+    let length = api.appVar.app.map.length;
+    let height = api.appVar.app.map.height;
+    $('.mapName').empty();
+    $('.mapName').append("<h1>" + mapId + ' : ' + name + "</h1>");
 
-  //clear board
-  onClearBoard();
-  //remove grid
-  eraseGrid();
-  //create new grid
-  createGrid(length, height);
-  //make grid clickable
-  addGridHandlers();
+    //clear board
+    onClearBoard();
+    //remove grid
+    eraseGrid();
+    //create new grid
+    createGrid(length, height);
+    //make grid clickable
+    addGridHandlers();
 
-  //checks each square
-  $('.square').each(function(){
-    //get index of square
-    let index = $(this).data('square');
+    //checks each square
+    $('.square').each(function(){
+      //get index of square
+      let index = $(this).data('square');
 
-    //loop through elements array
-    for (let i = 0; i < data.elements.length; i++) {
-      //if element order # is same as square index number insert img
-      if (data.elements[i].order === index) {
-        let thing = data.elements[i].thing;
+      //loop through elements array
+      for (let i = 0; i < data.elements.length; i++) {
+        //if element order # is same as square index number insert img
+        if (data.elements[i].order === index) {
+          let thing = data.elements[i].thing;
 
-        //switch statement to place an image of thing
-        switch(thing) {
-            case 'grass':
-                $(this).empty();
-                $(this).prepend(grassImg);
-                break;
-            case 'rock':
-                $(this).empty();
-                $(this).prepend(rockImg);
-                break;
-            case 'rocks':
-                $(this).empty();
-                $(this).prepend(rocksImg);
-                break;
-            case 'tree':
-                $(this).empty();
-                $(this).prepend(treeImg);
-                break;
-            case 'trees':
-                $(this).empty();
-                $(this).prepend(treesImg);
-                break;
-            case 'water':
-                $(this).empty();
-                $(this).prepend(waterImg);
-                break;
-            case 'water2':
-                $(this).empty();
-                $(this).prepend(water2Img);
-                break;
-            default:
-                $(this).empty();
+          //switch statement to place an image of thing
+          switch(thing) {
+              case 'grass':
+                  $(this).empty();
+                  $(this).prepend(grassImg);
+                  break;
+              case 'rock':
+                  $(this).empty();
+                  $(this).prepend(rockImg);
+                  break;
+              case 'rocks':
+                  $(this).empty();
+                  $(this).prepend(rocksImg);
+                  break;
+              case 'tree':
+                  $(this).empty();
+                  $(this).prepend(treeImg);
+                  break;
+              case 'trees':
+                  $(this).empty();
+                  $(this).prepend(treesImg);
+                  break;
+              case 'water':
+                  $(this).empty();
+                  $(this).prepend(waterImg);
+                  break;
+              case 'water2':
+                  $(this).empty();
+                  $(this).prepend(water2Img);
+                  break;
+              default:
+                  $(this).empty();
+          }
         }
       }
-    }
   });
 };
 
@@ -416,12 +473,25 @@ const onDeleteMap1 = function () {
 const onChangeMapName = function () {
   //show new map modal
   $('#change-map-name-modal').modal('show');
+};
 
+const onSelectMap = function (event) {
+  let target = $(event.target);
+  let mapId = target.data('id');
+  // console.log(search);
 
+  //get map by id
+  api.seeElements(mapId)
+    .done(displayMap)
+    .fail(ui.failure);
 };
 
 const addHandlers = () => {
   $('#sign-up').on('click', onSignUp);
+  $('#sign-up-submit').on('click',onSignUpSubmit);
+
+
+
   $('#log-in').on('click', onLogIn);
   $('#log-out').on('click', onLogOut);
   $('#change-password').on('click', onChangePassword);
@@ -429,6 +499,7 @@ const addHandlers = () => {
   $('#new-map').on('click', onNewMap);
   $('#clear-board').on('click', onClearBoard);
   $('#see-all-maps').on('click', onSeeAllMaps);
+  $('#show-all-maps-body').on('click', onSelectMap);
   $('#change-map-name').on('click', onChangeMapName);
   $('#load-map').on('click', onLoadMap);
   $('#delete-map').on('click', onDeleteMap1);
@@ -437,36 +508,6 @@ const addHandlers = () => {
   $('#clear-board').hide();
   $('.dropdown-toggle').hide();
   addGridHandlers();
-  //on submit
-  $('#sign-up-submit').on('click',function(){
-    //get text fields
-
-    let email = $('#sign-up-email').val();
-    let password = $('#sign-up-password').val();
-    let password_confirmation = $('#sign-up-confirm-password').val();
-
-    //put information into data object
-    let data = {
-      "credentials": {
-        "email": email,
-        "password": password,
-        "password_confirmation": password_confirmation
-      }
-    };
-
-    //send data to api
-    api.signUp(data)
-      .done(onLogIn2(email, password))
-      .fail(ui.failure);
-
-    //clear text fields
-    $('#sign-up-email').val('');
-    $('#sign-up-password').val('');
-    $('#sign-up-confirm-password').val('');
-
-    //close modal
-    $('#sign-up-modal').modal('hide');
-  });
 
   //on submit
   $('#log-in-submit').on('click',function(){

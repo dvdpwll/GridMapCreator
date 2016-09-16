@@ -16,7 +16,6 @@ const failure = (error) => {
 const signInSuccess = (data) => {
   //save user info
   appVar.app.user = data.user;
-  console.log(appVar);
 
   //change navbar brand to username
   $('.navbar-brand').empty();
