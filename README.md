@@ -1,9 +1,18 @@
 #GridMapCreator
 
 Back End: https://github.com/dvdpwll/GridMapCreatorApi
+<<<<<<< HEAD
 Deployed Front End: https://dvdpwll.github.io/GridMapCreator/
 Deployed Back End: https://murmuring-harbor-68088.herokuapp.com/
 
+=======
+
+Deployed Front End: https://dvdpwll.github.io/GridMapCreator/
+
+Deployed Back End: https://murmuring-harbor-68088.herokuapp.com/
+
+
+>>>>>>> master
 I'll be making a tabletop make creator. It's a grid that you can fill with things
 like trees, monsters, and buildings. This is designed to help the person who is
 planning the adventure (dungeon master) create and plan the maps the players
@@ -11,8 +20,6 @@ will be using.
 
 In this project I will have made a website and server to create and save DnD
 maps. I'll use HTML, JavaScript, Bootstrap, Ruby, and Ruby on Rails.
-
-Link to site: kjfldas;jfkldsajkl.com
 
 Technologies: HTML, SCSS, JS, JQUERY, AJAX, RUBY, RUBY ON RAILS
 
