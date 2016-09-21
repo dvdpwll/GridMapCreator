@@ -34,7 +34,6 @@ const signInSuccess = (data) => {
 const signOutSuccess = () => {
   //remove saved user info
   delete appVar.app.user;
-  console.log(appVar);
 
   //change navbar brand to default
   $('.navbar-brand').empty();
@@ -56,13 +55,10 @@ const newElementSuccess = (data) => {
 
   //save the data.element id into app.elements array using order
   appVar.app.elements[index] = data.element.id;
-  console.log(appVar.app.elements);
 };
 
 //success for new element
 const nameChangeSuccess = (name) => {
-  console.log(name);
-
   $('.mapName').empty();
   $('.mapName').append("<h1>" + name + "</h1>");
 };
