@@ -95,21 +95,31 @@
       <div class="text-center selectorsStart">
         <p>Objects Selector</p>
         <div class="btn-group selector-group" data-toggle="buttons">
+          <!-- LAYER 0 -->
+          <p class="select-layers layer-zero">Layer 0:</p>
           <label class="btn btn-default active">
-            <input type="radio" name="thing" value="none" id="none" autocomplete="off" checked>
-            <img class="selectors" title="clear space" src="./assets/none.png" alt="none" />
-          </label>
-          <label class="btn btn-default">
-            <input type="radio" name="thing" value="grass" id="grass" autocomplete="off">
+            <input type="radio" name="thing" value="grass" id="grass" autocomplete="off" checked>
             <img class="selectors" title="grass" src="./assets/grass.png" alt="grass" />
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="thing" value="rock" id="rock" autocomplete="off">
-            <img class="selectors" title="rock" src="./assets/rock.png" alt="rock" />
+            <input type="radio" name="thing" value="water" id="water" autocomplete="off">
+            <img class="selectors" title="water" src="./assets/water.png" alt="water" />
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="thing" value="water2" id="water2" autocomplete="off">
+            <img class="selectors" title="water2" src="./assets/water2.png" alt="water2" />
           </label>
           <label class="btn btn-default">
             <input type="radio" name="thing" value="rocks" id="rocks" autocomplete="off">
             <img class="selectors" title="rocks" src="./assets/rocks.png" alt="rocks" />
+          </label>
+          <br>
+
+          <!-- LAYER 1 -->
+          <p class="select-layers">Layer 1:</p>
+          <label class="btn btn-default">
+            <input type="radio" name="thing" value="rock" id="rock" autocomplete="off">
+            <img class="selectors" title="rock" src="./assets/rock.png" alt="rock" />
           </label>
           <label class="btn btn-default">
             <input type="radio" name="thing" value="tree" id="tree" autocomplete="off">
@@ -119,13 +129,13 @@
             <input type="radio" name="thing" value="trees" id="trees" autocomplete="off">
             <img class="selectors" title="trees" src="./assets/trees.png" alt="trees" />
           </label>
+          <br>
+
+          <!-- BLANK -->
+          <p class="select-layers">Blank/Erase:</p>
           <label class="btn btn-default">
-            <input type="radio" name="thing" value="water" id="water" autocomplete="off">
-            <img class="selectors" title="water" src="./assets/water.png" alt="water" />
-          </label>
-          <label class="btn btn-default">
-            <input type="radio" name="thing" value="water2" id="water2" autocomplete="off">
-            <img class="selectors" title="water2" src="./assets/water2.png" alt="water2" />
+            <input type="radio" name="thing" value="none" id="none" autocomplete="off">
+            <img class="selectors" title="clear space" src="./assets/none.png" alt="none" />
           </label>
         </div>
       </div>
