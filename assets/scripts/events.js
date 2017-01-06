@@ -3,13 +3,13 @@ const api = require('./api');
 const ui = require('./ui');
 
 //global variables, add new variables when adding new images
-let grassImg = '<img data-thing="grass" src="./assets/grass.png">';//change this if you change the img file for grass.
-let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
-let rocksImg = '<img data-thing="rocks" src="./assets/rocks.png">';//change this if you change the img file for rocks.
-let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
-let treesImg = '<img data-thing="trees" src="./assets/trees.png">';//change this if you change the img file for trees.
-let waterImg = '<img data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
-let water2Img = '<img data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
+let grassImg = '<img class="layer0" data-layer="0" data-thing="grass" src="./assets/grass.png">';//change this if you change the img file for grass.
+let rocksImg = '<img class="layer0" data-layer="0" data-thing="rocks" src="./assets/rocks.png">';//change this if you change the img file for rocks.
+let waterImg = '<img class="layer0" data-layer="0" data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
+let water2Img = '<img class="layer0" data-layer="0" data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
+let rockImg = '<img class="layer1" data-layer="1" data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
+let treeImg = '<img class="layer1" data-layer="1" data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
+let treesImg = '<img class="layer1" data-layer="1" data-thing="trees" src="./assets/trees.png">';//change this if you change the img file for trees.
 
 //-----------Functions-----------//
 //show sign up modal
@@ -180,35 +180,93 @@ const onMap = function () {
   //get the selected thing
   let selected = $("input[name='thing']:checked").val();
 
+  //check if there's an img already in the square
+  let countImg = $(this).children().length;
+
   //switch statement to place an image of thing
   switch(selected) {
       case 'grass':
-          $(this).empty();
-          $(this).prepend(grassImg);
+          //if there's no img, then just place a thing
+          if (countImg === 0) {
+              $(this).prepend(grassImg);
+          }
+          else {
+              //check if img is the same layer
+              //and if the current img is already there
+              if ($(this).find('.layer0').data('thing') !== 'grass') {
+                  //if the img is different, then remove that layer
+                  $(this).find('.layer0').remove();
+
+                  //add new image
+                  $(this).prepend(grassImg);
+              }
+          }
           break;
       case 'rock':
-          $(this).empty();
-          $(this).prepend(rockImg);
+          if (countImg === 0) {
+              $(this).prepend(rockImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'rock') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(rockImg);
+              }
+          }
           break;
       case 'rocks':
-          $(this).empty();
-          $(this).prepend(rocksImg);
+          if (countImg === 0) {
+              $(this).prepend(rocksImg);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'rocks') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(rocksImg);
+              }
+          }
           break;
       case 'tree':
-          $(this).empty();
-          $(this).prepend(treeImg);
+          if (countImg === 0) {
+              $(this).prepend(treeImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'tree') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(treeImg);
+              }
+          }
           break;
       case 'trees':
-          $(this).empty();
-          $(this).prepend(treesImg);
+          if (countImg === 0) {
+              $(this).prepend(treesImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'trees') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(treesImg);
+              }
+          }
           break;
       case 'water':
-          $(this).empty();
-          $(this).prepend(waterImg);
+          if (countImg === 0) {
+              $(this).prepend(waterImg);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'water') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(waterImg);
+              }
+          }
           break;
       case 'water2':
-          $(this).empty();
-          $(this).prepend(water2Img);
+          if (countImg === 0) {
+              $(this).prepend(water2Img);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'water2') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(water2Img);
+              }
+          }
           break;
       default:
           $(this).empty();
