@@ -48,13 +48,22 @@ const signOutSuccess = () => {
   $('#log-in').show();
 };
 
-//success for new element
-const newElementSuccess = (data) => {
+//success for new element0
+const newElementSuccess0 = (data) => {
   //get order number
   let index = data.element.order;
 
-  //save the data.element id into app.elements array using order
-  appVar.app.elements[index] = data.element.id;
+  //save the data.element id into app.elements0 array using order
+  appVar.app.elements0[index] = data.element.id;
+};
+
+//success for new element1
+const newElementSuccess1 = (data) => {
+  //get order number
+  let index = data.element.order;
+
+  //save the data.element id into app.elements1 array using order
+  appVar.app.elements1[index] = data.element.id;
 };
 
 //success for new element
@@ -65,7 +74,7 @@ const nameChangeSuccess = (name) => {
 
 //success for save elements
 const saveElementsSuccess = (i) => {
-  let last = appVar.app.elements.length;
+  let last = appVar.app.elements0.length;
   if (i === (--last)) {
     $('#messages-modal').modal('show');
 
@@ -126,7 +135,8 @@ module.exports = {
   failure,
   signInSuccess,
   signOutSuccess,
-  newElementSuccess,
+  newElementSuccess0,
+  newElementSuccess1,
   nameChangeSuccess,
   saveElementsSuccess,
   passwordSuccess,

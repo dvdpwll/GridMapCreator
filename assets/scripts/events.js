@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 const api = require('./api');
 const ui = require('./ui');
 
@@ -306,17 +306,33 @@ const newElements = function (data) {
     let order = $(this).data('square');
 
     //put info in data
-    let data = {
+    let data0 = {
       "element": {
         "thing": 'none',
         "order": order,
-        "map_id": mapId
+        "map_id": mapId,
+        "layer": 0,
+      }
+    };
+
+    //put info in data
+    let data1 = {
+      "element": {
+        "thing": 'none',
+        "order": order,
+        "map_id": mapId,
+        "layer": 1,
       }
     };
 
     // send data to api, make an element for each square
-    api.newElement(data)
-      .done(ui.newElementSuccess)
+    api.newElement(data0)
+      .done(ui.newElementSuccess0)
+      .fail(ui.failure);
+
+    // send data to api, make an element for each square
+    api.newElement(data1)
+      .done(ui.newElementSuccess1)
       .fail(ui.failure);
   });
 };
@@ -389,18 +405,31 @@ const onSaveMap = function () {
     //get order number
     let order = $(this).data('square');
 
-    //get id of element
-    let id = api.appVar.app.elements[order];
+    //get id of element0
+    let id0 = api.appVar.app.elements0[order];
 
-    //extracts the data-thing value from the img
-    let thing = $(this).children().data('thing');
+    //get id of element1
+    let id1 = api.appVar.app.elements1[order];
 
-    //if an image exists then send thing, if no img then send none
-    if (thing) {
-      sendSave(thing, id, order);
+    //extracts the data-thing value from the imgs
+    let thing0 = $(this).find('.layer0').data('thing');
+    let thing1 = $(this).find('.layer1').data('thing');
+
+
+    //if an image exists then send thing0, if no img then send none
+    if (thing0) {
+      sendSave(thing0, id0, order);
     }
     else {
-      sendSave('none', id, order);
+      sendSave('none', id0, order);
+    }
+
+    //if an image exists then send thing1, if no img then send none
+    if (thing1) {
+      sendSave(thing1, id1, order);
+    }
+    else {
+      sendSave('none', id1, order);
     }
   });
 };
