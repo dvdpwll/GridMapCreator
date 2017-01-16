@@ -384,17 +384,18 @@ const onNewMapSubmit = function () {
 };
 
 //send save data
-const sendSave = function (t, id, i) {
+const sendSave = function (t, id, layer, count, totalElements) {
   //put info in data object
   let data = {
     "element": {
       "thing": t,
+      "layer": layer,
     }
   };
 
   //send data and data id to api
   api.saveElement(data, id)
-    .done(ui.saveElementsSuccess(i))
+    .done(ui.saveElementsSuccess(count, totalElements))
     .fail(ui.failure);
 };
 
@@ -402,6 +403,12 @@ const sendSave = function (t, id, i) {
 const onSaveMap = function () {
   //checks each square
   $('.square').each(function(){
+    //get how many elements total
+    let totalElements = $('.square').length;
+
+    //get current count of elements
+    let count = 0;
+
     //get order number
     let order = $(this).data('square');
 
@@ -415,21 +422,29 @@ const onSaveMap = function () {
     let thing0 = $(this).find('.layer0').data('thing');
     let thing1 = $(this).find('.layer1').data('thing');
 
+    //layers
+    let layer0 = 0;
+    let layer1 = 1;
+
 
     //if an image exists then send thing0, if no img then send none
     if (thing0) {
-      sendSave(thing0, id0, order);
+      sendSave(thing0, id0, layer0, count, totalElements);
+      count++;
     }
     else {
-      sendSave('none', id0, order);
+      sendSave('none', id0, layer0, count, totalElements);
+      count++;
     }
 
     //if an image exists then send thing1, if no img then send none
     if (thing1) {
-      sendSave(thing1, id1, order);
+      sendSave(thing1, id1, layer1, count, totalElements);
+      count++;
     }
     else {
-      sendSave('none', id1, order);
+      sendSave('none', id1, layer1, count, totalElements);
+      count++;
     }
   });
 };
@@ -467,8 +482,17 @@ const displayMap = function (data) {
   //save elements id for later save
   for (let i = 0; i < data.elements.length; i++) {
     let order = data.elements[i].order;
-    api.appVar.app.elements[order] = data.elements[i].id;
+
+    if (data.elements[i].layer === 0) {
+      api.appVar.app.elements0[order] = data.elements[i].id;
     }
+    else if (data.elements[i].layer === 1) {
+      api.appVar.app.elements1[order] = data.elements[i].id;
+    }
+    else {
+      console.log('Error in displayMap function');
+    }
+  }
 
     //get map name and add to screen
     let name = api.appVar.app.map.name;
@@ -504,31 +528,24 @@ const displayMap = function (data) {
           //switch statement to place an image of thing
           switch(thing) {
               case 'grass':
-                  $(this).empty();
                   $(this).prepend(grassImg);
                   break;
               case 'rock':
-                  $(this).empty();
                   $(this).prepend(rockImg);
                   break;
               case 'rocks':
-                  $(this).empty();
                   $(this).prepend(rocksImg);
                   break;
               case 'tree':
-                  $(this).empty();
                   $(this).prepend(treeImg);
                   break;
               case 'trees':
-                  $(this).empty();
                   $(this).prepend(treesImg);
                   break;
               case 'water':
-                  $(this).empty();
                   $(this).prepend(waterImg);
                   break;
               case 'water2':
-                  $(this).empty();
                   $(this).prepend(water2Img);
                   break;
               default:

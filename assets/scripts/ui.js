@@ -73,9 +73,8 @@ const nameChangeSuccess = (name) => {
 };
 
 //success for save elements
-const saveElementsSuccess = (i) => {
-  let last = appVar.app.elements0.length;
-  if (i === (--last)) {
+const saveElementsSuccess = (count, totalElements) => {
+  if (count === totalElements) {
     $('#messages-modal').modal('show');
 
     //empty the body and title of messages modal
