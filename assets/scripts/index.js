@@ -9,5 +9,6 @@ const authEvents = require('./events.js');
 
 // On document ready
 $(() => {
+  $('.no-fouc').removeClass('no-fouc');
   authEvents.addHandlers();
 });
