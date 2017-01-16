@@ -2,9 +2,12 @@
 
 const app = {
   //api: 'http://httpbin.org',
-  // api: 'http://localhost:3000/',
+<<<<<<< HEAD
   api: 'https://murmuring-harbor-68088.herokuapp.com/',
-  elements: [],
+=======
+  elements0: [],
+  elements1: [],
+>>>>>>> master
 };
 
 module.exports = {

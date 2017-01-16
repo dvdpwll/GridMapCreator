@@ -1,15 +1,15 @@
-'use strict';
+ 'use strict';
 const api = require('./api');
 const ui = require('./ui');
 
 //global variables, add new variables when adding new images
-let grassImg = '<img data-thing="grass" src="./assets/grass.png">';//change this if you change the img file for grass.
-let rockImg = '<img data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
-let rocksImg = '<img data-thing="rocks" src="./assets/rocks.png">';//change this if you change the img file for rocks.
-let treeImg = '<img data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
-let treesImg = '<img data-thing="trees" src="./assets/trees.png">';//change this if you change the img file for trees.
-let waterImg = '<img data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
-let water2Img = '<img data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
+let grassImg = '<img class="layer0" data-layer="0" data-thing="grass" src="./assets/grass.png">';//change this if you change the img file for grass.
+let rocksImg = '<img class="layer0" data-layer="0" data-thing="rocks" src="./assets/rocks.png">';//change this if you change the img file for rocks.
+let waterImg = '<img class="layer0" data-layer="0" data-thing="water" src="./assets/water.png">';//change this if you change the img file for water.
+let water2Img = '<img class="layer0" data-layer="0" data-thing="water2" src="./assets/water2.png">';//change this if you change the img file for water2.
+let rockImg = '<img class="layer1" data-layer="1" data-thing="rock" src="./assets/rock.png">';//change this if you change the img file for rock.
+let treeImg = '<img class="layer1" data-layer="1" data-thing="tree" src="./assets/tree.png">';//change this if you change the img file for tree.
+let treesImg = '<img class="layer1" data-layer="1" data-thing="trees" src="./assets/trees.png">';//change this if you change the img file for trees.
 
 //-----------Functions-----------//
 //show sign up modal
@@ -180,35 +180,93 @@ const onMap = function () {
   //get the selected thing
   let selected = $("input[name='thing']:checked").val();
 
+  //check if there's an img already in the square
+  let countImg = $(this).children().length;
+
   //switch statement to place an image of thing
   switch(selected) {
       case 'grass':
-          $(this).empty();
-          $(this).prepend(grassImg);
+          //if there's no img, then just place a thing
+          if (countImg === 0) {
+              $(this).prepend(grassImg);
+          }
+          else {
+              //check if img is the same layer
+              //and if the current img is already there
+              if ($(this).find('.layer0').data('thing') !== 'grass') {
+                  //if the img is different, then remove that layer
+                  $(this).find('.layer0').remove();
+
+                  //add new image
+                  $(this).prepend(grassImg);
+              }
+          }
           break;
       case 'rock':
-          $(this).empty();
-          $(this).prepend(rockImg);
+          if (countImg === 0) {
+              $(this).prepend(rockImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'rock') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(rockImg);
+              }
+          }
           break;
       case 'rocks':
-          $(this).empty();
-          $(this).prepend(rocksImg);
+          if (countImg === 0) {
+              $(this).prepend(rocksImg);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'rocks') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(rocksImg);
+              }
+          }
           break;
       case 'tree':
-          $(this).empty();
-          $(this).prepend(treeImg);
+          if (countImg === 0) {
+              $(this).prepend(treeImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'tree') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(treeImg);
+              }
+          }
           break;
       case 'trees':
-          $(this).empty();
-          $(this).prepend(treesImg);
+          if (countImg === 0) {
+              $(this).prepend(treesImg);
+          }
+          else {
+              if ($(this).find('.layer1').data('thing') !== 'trees') {
+                  $(this).find('.layer1').remove();
+                  $(this).prepend(treesImg);
+              }
+          }
           break;
       case 'water':
-          $(this).empty();
-          $(this).prepend(waterImg);
+          if (countImg === 0) {
+              $(this).prepend(waterImg);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'water') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(waterImg);
+              }
+          }
           break;
       case 'water2':
-          $(this).empty();
-          $(this).prepend(water2Img);
+          if (countImg === 0) {
+              $(this).prepend(water2Img);
+          }
+          else {
+              if ($(this).find('.layer0').data('thing') !== 'water2') {
+                  $(this).find('.layer0').remove();
+                  $(this).prepend(water2Img);
+              }
+          }
           break;
       default:
           $(this).empty();
@@ -248,17 +306,33 @@ const newElements = function (data) {
     let order = $(this).data('square');
 
     //put info in data
-    let data = {
+    let data0 = {
       "element": {
         "thing": 'none',
         "order": order,
-        "map_id": mapId
+        "map_id": mapId,
+        "layer": 0,
+      }
+    };
+
+    //put info in data
+    let data1 = {
+      "element": {
+        "thing": 'none',
+        "order": order,
+        "map_id": mapId,
+        "layer": 1,
       }
     };
 
     // send data to api, make an element for each square
-    api.newElement(data)
-      .done(ui.newElementSuccess)
+    api.newElement(data0)
+      .done(ui.newElementSuccess0)
+      .fail(ui.failure);
+
+    // send data to api, make an element for each square
+    api.newElement(data1)
+      .done(ui.newElementSuccess1)
       .fail(ui.failure);
   });
 };
@@ -310,17 +384,18 @@ const onNewMapSubmit = function () {
 };
 
 //send save data
-const sendSave = function (t, id, i) {
+const sendSave = function (t, id, layer, count, totalElements) {
   //put info in data object
   let data = {
     "element": {
       "thing": t,
+      "layer": layer,
     }
   };
 
   //send data and data id to api
   api.saveElement(data, id)
-    .done(ui.saveElementsSuccess(i))
+    .done(ui.saveElementsSuccess(count, totalElements))
     .fail(ui.failure);
 };
 
@@ -328,21 +403,48 @@ const sendSave = function (t, id, i) {
 const onSaveMap = function () {
   //checks each square
   $('.square').each(function(){
+    //get how many elements total
+    let totalElements = $('.square').length;
+
+    //get current count of elements
+    let count = 0;
+
     //get order number
     let order = $(this).data('square');
 
-    //get id of element
-    let id = api.appVar.app.elements[order];
+    //get id of element0
+    let id0 = api.appVar.app.elements0[order];
 
-    //extracts the data-thing value from the img
-    let thing = $(this).children().data('thing');
+    //get id of element1
+    let id1 = api.appVar.app.elements1[order];
 
-    //if an image exists then send thing, if no img then send none
-    if (thing) {
-      sendSave(thing, id, order);
+    //extracts the data-thing value from the imgs
+    let thing0 = $(this).find('.layer0').data('thing');
+    let thing1 = $(this).find('.layer1').data('thing');
+
+    //layers
+    let layer0 = 0;
+    let layer1 = 1;
+
+
+    //if an image exists then send thing0, if no img then send none
+    if (thing0) {
+      sendSave(thing0, id0, layer0, count, totalElements);
+      count++;
     }
     else {
-      sendSave('none', id, order);
+      sendSave('none', id0, layer0, count, totalElements);
+      count++;
+    }
+
+    //if an image exists then send thing1, if no img then send none
+    if (thing1) {
+      sendSave(thing1, id1, layer1, count, totalElements);
+      count++;
+    }
+    else {
+      sendSave('none', id1, layer1, count, totalElements);
+      count++;
     }
   });
 };
@@ -380,8 +482,17 @@ const displayMap = function (data) {
   //save elements id for later save
   for (let i = 0; i < data.elements.length; i++) {
     let order = data.elements[i].order;
-    api.appVar.app.elements[order] = data.elements[i].id;
+
+    if (data.elements[i].layer === 0) {
+      api.appVar.app.elements0[order] = data.elements[i].id;
     }
+    else if (data.elements[i].layer === 1) {
+      api.appVar.app.elements1[order] = data.elements[i].id;
+    }
+    else {
+      console.log('Error in displayMap function');
+    }
+  }
 
     //get map name and add to screen
     let name = api.appVar.app.map.name;
@@ -417,31 +528,24 @@ const displayMap = function (data) {
           //switch statement to place an image of thing
           switch(thing) {
               case 'grass':
-                  $(this).empty();
                   $(this).prepend(grassImg);
                   break;
               case 'rock':
-                  $(this).empty();
                   $(this).prepend(rockImg);
                   break;
               case 'rocks':
-                  $(this).empty();
                   $(this).prepend(rocksImg);
                   break;
               case 'tree':
-                  $(this).empty();
                   $(this).prepend(treeImg);
                   break;
               case 'trees':
-                  $(this).empty();
                   $(this).prepend(treesImg);
                   break;
               case 'water':
-                  $(this).empty();
                   $(this).prepend(waterImg);
                   break;
               case 'water2':
-                  $(this).empty();
                   $(this).prepend(water2Img);
                   break;
               default:

@@ -10,22 +10,37 @@ h1 {
   background-color: $pure-white;
   height: 250px;
   margin: auto;
-  max-width: 250px;
+  width: 250px;
 }
 
 .square {
   border: 1px solid $grid-lines;
-  max-height: 50px;
-  max-width: 50px;
-  min-height: 50px;
-  min-width: 50px;
+  float: left;
+  height: 50px;
   padding: 0;
+  position: relative;
+  width: 50px;
+  z-index: 0;
 }
 
 .square > img {
   height: 50px;
   padding: 0;
   width: 50px;
+}
+
+.layer0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.layer1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .selectors {
@@ -35,7 +50,16 @@ h1 {
 }
 
 .selectorsStart {
-  margin-top: 20px;
+  margin-top: 50px;
+}
+
+.select-layers {
+  text-align: left;
+  margin-top: 40px;
+}
+
+.layer-zero {
+  margin: auto;
 }
 
 footer {
