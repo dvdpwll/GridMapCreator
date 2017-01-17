@@ -215,7 +215,7 @@ webpackJsonp([0],[
 
 	  // center the gameboard by changeing the width
 	  var varLength = l * 50;
-	  $('.gameboard').css('max-width', varLength + 'px');
+	  $('.gameboard').css('width', varLength + 'px');
 	};
 
 	//place a thing
