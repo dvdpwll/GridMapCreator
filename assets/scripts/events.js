@@ -172,7 +172,7 @@ const createGrid = function (l, h) {
 
   // center the gameboard by changeing the width
   let varLength = l * 50;
-  $('.gameboard').css('max-width', varLength + 'px');
+  $('.gameboard').css('width', varLength + 'px');
 };
 
 //place a thing
